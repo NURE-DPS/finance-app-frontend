@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+@theme {
+  --font-montserrat: Montserrat, sans-serif;
+  --font-lato: Lato, sans-serif;
+}

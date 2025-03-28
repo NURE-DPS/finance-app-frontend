@@ -10,10 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/lato": "^5.2.5",
+    "@fontsource/montserrat": "^5.2.5",
     "@tailwindcss/vite": "^4.0.17",
     "axios": "^1.8.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-router-dom": "^7.4.0",
     "tailwindcss": "^4.0.17"
   },
   "devDependencies": {
