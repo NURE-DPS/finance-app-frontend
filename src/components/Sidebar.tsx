@@ -2,7 +2,7 @@ import {Link } from "react-router-dom"
 
 export const Sidebar = () => {
   return (
-    <div className="w-64 bg-gray-900 text-white h-full p-6">
+    <div className="basis-1/7 min-h-screen h-full text-white p-6">
       <h2 className="text-xl font-bold mb-6">Finance Tracker</h2>
       <nav>
         <ul>

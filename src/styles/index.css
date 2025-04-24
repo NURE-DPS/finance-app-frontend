@@ -2,6 +2,41 @@
 @import './fonts.css';
 
 @theme {
+  /* FONTS */
   --font-montserrat: Montserrat, sans-serif;
   --font-lato: Lato, sans-serif;
+  /* TEXT SIZES */
+  --text-display: 2.75rem;
+  --text-h1: 2rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body: 1rem;
+  --text-caption: 0.75rem;
+  /* COLORS */
+  --color-background: #121212;
+  --color-surface: #1A1A1A;
+  --color-color: #E0E0E0;
+  --color-subtext: #A0A0A0;
+  --color-disabled: #666666;
+  --color-border: #3B3B3B;
+  --color-divider: #2E2E2E;
+  --color-primary: #1E1E2E;
+  --color-secondary: #282A36;
+  --color-accent: #8AADF4;
+  --color-success: #98C379;
+  --color-error: #E06C75;
+  --color-warning: #E5C07B;
+  --color-info: #61AFEF;
+}
+body,
+html {
+  width: 100%;
+  margin: 0;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  height: 100%;
 }
