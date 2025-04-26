@@ -50,7 +50,8 @@
 
 Бекенд розгорнутий на Render і доступний за цим посиланням:
 
-[render](https://finance-app-backend-uvqx.onrender.com)
+[main](https://finance-app-backend-uvqx.onrender.com)
+[dev](https://finance-app-backend-dev.onrender.com/)
 
 Використовуйте це посилання для звернення з фронтенду до API.
 
@@ -74,8 +75,9 @@
 - **Створити нову гілку**:
 
   ```bash
-  git checkout -b feat/TASK-123-login
+  git checkout -b feat/FTA-125-name
   ```
+**Створюємо гілки для усієї юзер стоі, а не окремо для кожної сабтаски*
 
 - **Працюєш у своїй гілці**
 - **Зберігаєш, лінтиш**:
@@ -98,11 +100,11 @@
 
 - **dev** — основна гілка розробки
 
-- **feat/назва** — нова фіча
+  - **feat/назва** — нова фіча
 
-- **fix/назва** — виправлення багів
+  - **fix/назва** — виправлення багів
 
-- **refactor/назва** — рефакторинг коду
+  - **refactor/назва** — рефакторинг коду
 
 ### 1. Створення нової гілки
 
@@ -159,3 +161,31 @@ src/
   "preview": "vite preview" // перегляд зібраного білду
 }
   ```
+
+---
+
+## Неймінг гілок та комітів
+
+### Гілки
+
+#### Category (branches)
+
+- feature - новий функціонал
+- bugfix - для фікса баги
+
+#### Reference
+
+After the category, there should be a "/" followed by the reference of the issue/ticket you are working on. If there's no reference, just add no-ref.
+
+`git branch <category/reference/description-in-kebab-case>`
+
+### Коміти
+
+#### Category (commits)
+
+- feate - новий функціонал
+- fix - для фікса баги
+- refactor - для зміни коду для продуктивносі чи зручності
+- chore - для усього іншого (документація, форматування, тестів, чистки)
+
+`git commit -m '<category: do something; do some other things>'`
