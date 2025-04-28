@@ -1,4 +1,4 @@
-import { LuCircleX } from 'react-icons/lu'
+import { LuX } from 'react-icons/lu'
 
 export default function CreateTransModal({ onClose }: { onClose: () => void }) {
   return (
@@ -7,9 +7,9 @@ export default function CreateTransModal({ onClose }: { onClose: () => void }) {
         <h2 className="text-h3 text-lato font-bold mb-4">Create Trans</h2>
         <button
           onClick={onClose}
-          className="text-color hover:disabled text-h2 leading-none cursor-pointer"
+          className="text-color hover:text-disabled text-h2 leading-none cursor-pointer"
         >
-          <LuCircleX />
+          <LuX />
         </button>
       </div>
       <p>Transaction creation</p>
