@@ -19,7 +19,7 @@ export const Sidebar = () => {
             </Link>
           </li>
           <li className="mb-4">
-            <Link to="/settings" className="hover:text-gray-300">
+            <Link to="/settings" className="hover:text-disabled">
               Settings
             </Link>
           </li>
