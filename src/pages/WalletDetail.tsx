@@ -26,6 +26,7 @@ export const WalletDetail = () => {
             onChange={handleWalletChange}
             className="w-1/3 p-2 bg-surface text-color font-lato text-h3 rounded-lg"
           >
+            {/*тут в идеале нужно написать свой компонент для выпадающего списка*/}
             {wallets.map((wallet) => (
               <option key={wallet.id} value={wallet.id}>
                 {wallet.name} - {wallet.balance} {wallet.currency}

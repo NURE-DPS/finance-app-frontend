@@ -1,15 +1,15 @@
-import { ShowWallet } from '../components/ShowWallet'
+import { WalletCard } from '../components/WalletCard'
 import { wallets } from '../stores/wallets'
 
 export const Wallets = () => {
   return (
-    <div className="p-8">
-      <h3 className="text-h2 font-bold mb-8 text-center text-color font-montserrat">
+    <div className="text-color h-screen">
+      <h3 className=" w-full text-left text-h2 font-bold mb-8 pl-4 font-montserrat">
         My Wallets
       </h3>
       <div className="grid grid-cols-3 justify-center gap-8">
         {wallets.map((wallet) => (
-          <ShowWallet
+          <WalletCard
             key={wallet.id}
             id={wallet.id}
             name={wallet.name}

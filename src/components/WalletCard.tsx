@@ -7,7 +7,7 @@ type WalletProps = {
   currency: string
 }
 
-export const ShowWallet = ({ id, name, balance, currency }: WalletProps) => {
+export const WalletCard = ({ id, name, balance, currency }: WalletProps) => {
   return (
     <Link
       to={`/wallets/${id}`}
