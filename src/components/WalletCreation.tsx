@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { decimalInputHandler, limitedTextHandler } from '../utils/inputHandlers'
+import { decimalInputHandler, limitedTextHandler } from '../utils/InputHandlers'
 import { LuCircleX /*LuX*/ } from 'react-icons/lu' //2 options to choose from, I prefer LuCircleX
+import { createWallet } from '../api/walletsApi'
+
 export default function WalletCreation({ onClose }: { onClose: () => void }) {
   const [name, setName] = useState('')
   const [currency, setCurrency] = useState('EUR')
   const [balance, setBalance] = useState('0.00')
 
+  //передать добро
   const handleSave = () => {
-    console.log('Wallet Added:', { name, currency, balance })
+    const createdWallet = createWallet({ name, currency, balance })
     onClose()
   }
   return (
