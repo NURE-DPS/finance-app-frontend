@@ -7,7 +7,11 @@ export default function WalletCreation({ onClose }: { onClose: () => void }) {
   const [balance, setBalance] = useState('0.00')
 
   const handleSave = () => {
+<<<<<<< Updated upstream
     console.log('Wallet Added:', { name, currency, balance })
+=======
+    createWallet({ name, currency, balance })
+>>>>>>> Stashed changes
     onClose()
   }
   return (
