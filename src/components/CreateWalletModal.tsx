@@ -1,17 +1,16 @@
 import { useState } from 'react'
 import { decimalInputHandler, limitedTextHandler } from '../utils/inputHandlers'
-import { LuCircleX /*LuX*/ } from 'react-icons/lu' //2 options to choose from, I prefer LuCircleX
+import { LuX } from 'react-icons/lu'
+import { createWallet } from '../api/walletsApi'
+
 export default function WalletCreation({ onClose }: { onClose: () => void }) {
   const [name, setName] = useState('')
   const [currency, setCurrency] = useState('EUR')
   const [balance, setBalance] = useState('0.00')
 
+  //передать добро
   const handleSave = () => {
-<<<<<<< Updated upstream
-    console.log('Wallet Added:', { name, currency, balance })
-=======
     createWallet({ name, currency, balance })
->>>>>>> Stashed changes
     onClose()
   }
   return (
@@ -22,7 +21,7 @@ export default function WalletCreation({ onClose }: { onClose: () => void }) {
           onClick={onClose}
           className="text-color hover:text-disabled text-2xl leading-none cursor-pointer"
         >
-          <LuCircleX />
+          <LuX />
         </button>
       </div>
 
@@ -48,6 +47,7 @@ export default function WalletCreation({ onClose }: { onClose: () => void }) {
             onChange={(e) => setCurrency(e.target.value)}
             className="w-full p-2 border border-border rounded mt-1 bg-surface transition cursor-pointer font-montserrat"
           >
+            {/*тут в идеале нужно написать свой компонент для выпадающего списка*/}
             <option value="EUR">EUR</option>
             <option value="USD">USD</option>
             <option value="UAH">UAH</option>
