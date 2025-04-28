@@ -1,4 +1,4 @@
-import WalletCreation from '../components/CreateWalletModal'
+import { CreateWalletModal } from '../components/CreateWalletModal'
 import { useState } from 'react'
 
 export const Dashboard = () => {
@@ -16,7 +16,9 @@ export const Dashboard = () => {
         </button>
         {isWalletCreation && (
           <div className="fixed inset-0 flex items-start justify-center bg-background/40">
-            <WalletCreation onClose={() => setIsWalletCreation(false)} />
+            <div className="bg-surface w-[600px] p-6 rounded-2xl shadow-lg mt-8">
+              <CreateWalletModal onClose={() => setIsWalletCreation(false)} />
+            </div>
           </div>
         )}
       </div>

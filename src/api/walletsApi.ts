@@ -33,5 +33,6 @@ export const fetchWallets = () => {
 export default api
 
 function getToken() {
-  throw new Error('Function not implemented.')
+  return 'temp';
+  // throw new Error('Function not implemented.')
 }
