@@ -1,4 +1,4 @@
-export interface EditWalletModalProps {
+export interface ChangeWalletModalProps {
   onClose: () => void
   defname: string
   defcurr: string
