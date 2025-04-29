@@ -1,4 +1,5 @@
-import WalletCreation from '../components/CreateWalletModal'
+import { Button } from '../components/Button'
+import { CreateWalletModal } from '../components/Wallets/CreateWalletModal'
 import { useState } from 'react'
 
 export const Dashboard = () => {
@@ -8,15 +9,17 @@ export const Dashboard = () => {
     <div className="text-color h-screen">
       <div className="w-full flex items-center justify-between">
         <div className="text-xl font-bold font-montserrat">Dashboard</div>
-        <button
+        <Button
           onClick={() => setIsWalletCreation(true)}
-          className="px-4 py-2 mr-4 bg-color text-surface rounded-[12px] hover:bg-disabled transition cursor-pointer font-lato"
-        >
-          Add Wallet
-        </button>
+          text="Add Wallet"
+          fullwidth={false}
+          defpadding={false}
+        />
         {isWalletCreation && (
           <div className="fixed inset-0 flex items-start justify-center bg-background/40">
-            <WalletCreation onClose={() => setIsWalletCreation(false)} />
+            <div className="bg-surface w-[600px] p-6 rounded-2xl shadow-lg mt-8">
+              <CreateWalletModal onClose={() => setIsWalletCreation(false)} />
+            </div>
           </div>
         )}
       </div>
