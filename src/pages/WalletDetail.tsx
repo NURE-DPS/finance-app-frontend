@@ -1,6 +1,6 @@
 import { wallets } from '../stores/wallets'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useState } from 'react'
+import { /*useEffect,*/ useState } from 'react'
 import CreateTransModal from '../components/CreateTransModal'
 import { LuTrash2, LuFolderPen } from 'react-icons/lu'
 import { EditWalletModal } from '../components/Wallets/EditWalletModal'
