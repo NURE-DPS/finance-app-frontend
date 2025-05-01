@@ -46,37 +46,50 @@
 
 ---
 
-## Бекенд
-
-Бекенд розгорнутий на Render і доступний за цим посиланням:
-
-[main](https://finance-app-backend-uvqx.onrender.com)
-[dev](https://finance-app-backend-dev.onrender.com/)
-
-Використовуйте це посилання для звернення з фронтенду до API.
-
----
-
 ## Jira + Git
 
-### 1. Як прив'язати коміт до таски
+### 1. Комміт = subtask
 
 У коміт-повідомленні:
 
   ```bash
-  TASK-123: Додав авторизацію через Supabase
+  [FTA-123] <type>: *message*
   ```
 
-**TASK-123 — це ключ завдання у Jira. Такі коміти автоматично відображаються у Jira.*
+#### Types
 
-### 2. Робочий флоу:
+1. feat — додавання нової фічі, яку побачить користувач або яка змінює поведінку системи.
+2. fix — виправлення багу, який порушує очікувану поведінку.
+3. refactor — переписування або очищення коду без зміни функціональності.
+4. chore — допоміжні зміни, які не впливають на функціональність (наприклад, оновлення залежностей, конфігурацій, скриптів).
+5. test — додавання або зміна юніт-тестів, інтеграційних тестів тощо.
+6. style — зміни, що не впливають на логіку: форматування, пробіли, лапки, ESLint-фікси тощо.
+
+**FTA-123 — це ключ subtask у Jira.*
+**message пишеться з маленької літери, без крапки в кінці.*
+
+### 2. Гілка = User Story / Task / Bug
+
+У назві гілки:
+  
+  ```bash
+  FTA-123:*user-registration* 
+  ```
+
+**FTA-123 — ключ Jira.*
+**user-registration — короткий опис задачі (1–2 слова), у форматі: іменник + інфінітив дії (наприклад: transaction-creation, profile-update).*
+**Весь опис пишеться з маленької літери, слова розділяються дефісом.*
+
+### 3. Робочий флоу
 
 - **Взяти задачу в Jira (To Do → In Progress)**
+- **Перевірити, що ви знаходитесь у dev гілці**
 - **Створити нову гілку**:
 
   ```bash
-  git checkout -b feat/FTA-125-name
+  git checkout -b FTA-123:test-branch 
   ```
+
 **Створюємо гілки для усієї юзер стоі, а не окремо для кожної сабтаски*
 
 - **Працюєш у своїй гілці**
@@ -85,12 +98,12 @@
   ```bash
   pnpm lint
   git add .
-  git commit -m "TASK-123: Реалізував логіку входу"
-  git push origin feat/TASK-123-login
+  git commit -m "[FTA-123] <type>: *message*"
+  git push origin [FTA-123]:test-branch 
   ```
 
 - **Створюєш Pull Request на GitHub**
-- **Jira автоматично бачить цей PR і оновлює статус**
+- **Переносиш задачу у статус In Review**
 
 ---
 
@@ -99,29 +112,6 @@
 - **main** — основна гілка (тільки для стабільного коду)
 
 - **dev** — основна гілка розробки
-
-  - **feat/назва** — нова фіча
-
-  - **fix/назва** — виправлення багів
-
-  - **refactor/назва** — рефакторинг коду
-
-### 1. Створення нової гілки
-
-  ```bash
-git checkout -b feat/TASK-321-daily-report
-  ```
-
-### 2. Злиття змін з dev
-
-  ```bash
-git checkout dev
-git pull
-git checkout feat/твоя
-git merge dev
-  ```
-
-**Після цього необхідно виправити конфлікти, якщо є, і запушити оновлення.*
 
 ---
 
@@ -161,31 +151,3 @@ src/
   "preview": "vite preview" // перегляд зібраного білду
 }
   ```
-
----
-
-## Неймінг гілок та комітів
-
-### Гілки
-
-#### Category (branches)
-
-- feature - новий функціонал
-- bugfix - для фікса баги
-
-#### Reference
-
-After the category, there should be a "/" followed by the reference of the issue/ticket you are working on. If there's no reference, just add no-ref.
-
-`git branch <category/reference/description-in-kebab-case>`
-
-### Коміти
-
-#### Category (commits)
-
-- feate - новий функціонал
-- fix - для фікса баги
-- refactor - для зміни коду для продуктивносі чи зручності
-- chore - для усього іншого (документація, форматування, тестів, чистки)
-
-`git commit -m '<category: do something; do some other things>'`
