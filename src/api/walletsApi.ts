@@ -4,19 +4,19 @@ const api = axios.create({
   baseURL: 'http://localhost:8000/api',
 })
 
-api.interceptors.request.use(
-  (config) => {
-    const token = getToken();
-    if (token!) {
-      config.headers.Authorization = `Bearer ${token}`
-    }
+// api.interceptors.request.use(
+//   (config) => {
+//     const token = getToken();
+//     if (token!) {
+//       config.headers.Authorization = `Bearer ${token}`
+//     }
 
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
-  },
-)
+//     return config
+//   },
+//   (error) => {
+//     return Promise.reject(error)
+//   },
+// )
 
 export const createWallet = (walletData: {
   name: string
@@ -32,7 +32,6 @@ export const fetchWallets = () => {
 
 export default api
 
-function getToken() {
-  return 'temp';
-  // throw new Error('Function not implemented.')
-}
+// function getToken() {
+//   throw new Error('Function not implemented.')
+// }
