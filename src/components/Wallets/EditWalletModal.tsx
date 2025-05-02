@@ -1,21 +1,22 @@
 import { useState } from 'react'
-//import { editWallet } from '../api/walletsApi'
+//import { editWallet } from '../../api/walletsApi'
 import { WalletModal } from './WalletModal'
-import type { EditWalletModalProps } from '../interfaces/ChangeWalletModalProps'
+import { ChangeWalletModalProps } from '../../interfaces/ChangeWalletModalProps'
 
 export const EditWalletModal = ({
   onClose,
+  //defid,
   defname,
   defcurr,
   defbalance,
-}: EditWalletModalProps) => {
+}: ChangeWalletModalProps) => {
   const [name, setName] = useState(defname)
   const [currency, setCurrency] = useState(defcurr)
   const [balance, setBalance] = useState(defbalance)
 
   const handleSave = () => {
     console.log({ name, currency, balance })
-    //const createdWallet = editWallet({ name, currency, balance })
+    //const createdWallet = editWallet({defid, name, currency, balance })
     onClose()
   }
 

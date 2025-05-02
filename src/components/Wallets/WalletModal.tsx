@@ -1,5 +1,10 @@
-import { decimalInputHandler, limitedTextHandler } from '../utils/inputHandlers'
+import {
+  decimalInputHandler,
+  limitedTextHandler,
+} from '../../utils/inputHandlers'
 import { LuX } from 'react-icons/lu'
+import { Button } from '../Button'
+import { IconButton } from '../IconButton'
 
 interface WalletModalProps {
   title: string
@@ -28,12 +33,7 @@ export const WalletModal = ({
     <div>
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-lg font-semibold font-montserrat">{title}</h2>
-        <button
-          onClick={onClose}
-          className="text-color hover:text-disabled text-2xl leading-none cursor-pointer"
-        >
-          <LuX />
-        </button>
+        <IconButton onClick={onClose} Icon={LuX} />
       </div>
 
       <form>
@@ -81,21 +81,14 @@ export const WalletModal = ({
             </span>
           </div>
         </div>
-        {/* нужен цвет для наведения на кнопку, а то он такой же как выключенная кнопка */}
-        <button
-          type="button"
+        <Button
           onClick={onSave}
-          disabled={name.trim() === '' || balance.trim() === ''}
-          className={`w-full p-2 rounded-[12px] mt-4 transition font-lato
-                ${
-                  name.trim() === '' || balance.trim() === ''
-                    ? 'bg-disabled text-color cursor-not-allowed'
-                    : 'bg-color text-surface hover:bg-gray-400 cursor-pointer'
-                }
-              `}
-        >
-          Save
-        </button>
+          text="Save"
+          margtop={true}
+          isDisabled={true}
+          disabledCondition={name.trim() === '' || balance.trim() === ''}
+          deftype={true}
+        />
       </form>
     </div>
   )

@@ -1,4 +1,5 @@
-import type { DeleteWalletModalProps } from '../interfaces/ChangeWalletModalProps'
+import { ChangeWalletModalProps } from '../../interfaces/ChangeWalletModalProps'
+import { Button } from '../Button'
 
 export const DeleteWalletModal = ({
   onClose,
@@ -6,7 +7,7 @@ export const DeleteWalletModal = ({
   defname,
   defcurr,
   defbalance,
-}: DeleteWalletModalProps) => {
+}: ChangeWalletModalProps) => {
   const handleDelete = () => {
     console.log({ defname, defcurr, defbalance })
     //const deletedWallet = deleteWallet({ defid })
@@ -25,18 +26,8 @@ export const DeleteWalletModal = ({
         </p>
       </div>
       <div className="grid grid-cols-2 text-surface mt-8 gap-4">
-        <button
-          onClick={handleDelete}
-          className="w-full bg-error rounded-[12px] p-2 hover:bg-red-300 transition cursor-pointer"
-        >
-          Yes
-        </button>
-        <button
-          onClick={onClose}
-          className="w-full bg-color rounded-[12px] p-2 hover:bg-disabled transition cursor-pointer"
-        >
-          No
-        </button>
+        <Button onClick={handleDelete} text="Yes" defcolor={false} />
+        <Button onClick={onClose} text="No" />
       </div>
     </div>
   )

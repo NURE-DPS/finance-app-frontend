@@ -1,5 +1,5 @@
 import { useState } from 'react'
-//import { createWallet } from '../api/walletsApi'
+//import { createWallet } from '../../api/walletsApi'
 import { WalletModal } from './WalletModal'
 
 export const CreateWalletModal = ({ onClose }: { onClose: () => void }) => {
