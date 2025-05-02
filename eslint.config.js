@@ -2,26 +2,30 @@ import js from '@eslint/js'
 import globals from 'globals'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import prettier from 'eslint-plugin-prettier'
+import typescriptPlugin from '@typescript-eslint/eslint-plugin'
+import parser from '@typescript-eslint/parser'
 
-export default tseslint.config(
-  { ignores: ['dist'] },
+export default [
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      'plugin:prettier/recommended',
-      'plugin:tailwindcss/recommended',
-    ],
+    ignores: ['dist'],
+  },
+  {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
+      parser, // вот сюда, а не просто "parser" в корне
+      parserOptions: {
+        project: './tsconfig.app.json', // 👈 укажи путь к tsconfig
+      },
       ecmaVersion: 2020,
+      sourceType: 'module',
       globals: globals.browser,
     },
     plugins: {
+      '@typescript-eslint': typescriptPlugin,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      prettier: 'eslint-plugin-prettier',
+      prettier,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -30,6 +34,18 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       'prettier/prettier': 'error',
+      '@typescript-eslint/no-unused-vars': 'error',
+      '@typescript-eslint/explicit-module-boundary-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-floating-promises': 'error',
+      '@typescript-eslint/await-thenable': 'error',
+      '@typescript-eslint/strict-boolean-expressions': 'warn',
+      '@typescript-eslint/prefer-optional-chain': 'warn',
+      '@typescript-eslint/prefer-nullish-coalescing': 'warn',
+      '@typescript-eslint/consistent-type-imports': 'warn',
+      '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
+      '@typescript-eslint/no-inferrable-types': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'warn',
     },
   },
-)
+]

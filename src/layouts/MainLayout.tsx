@@ -1,4 +1,4 @@
-import { ReactElement } from 'react'
+import type { ReactElement } from 'react'
 import { Sidebar } from '../components/Sidebar'
 
 export const MainLayout = ({ children }: { children: ReactElement }) => {

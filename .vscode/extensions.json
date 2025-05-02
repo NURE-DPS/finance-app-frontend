@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "postman.postman-for-vscode",
+    "bradlc.vscode-tailwindcss",
+    "donjayamanne.githistory",
+    "github.vscode-pull-request-github"
+  ]
+}

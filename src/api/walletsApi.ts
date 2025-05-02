@@ -6,8 +6,8 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    const token = getToken();
-    if (token!) {
+    const token = getToken()
+    if (token) {
       config.headers.Authorization = `Bearer ${token}`
     }
 
@@ -33,6 +33,6 @@ export const fetchWallets = () => {
 export default api
 
 function getToken() {
-  return 'temp';
+  return 'temp'
   // throw new Error('Function not implemented.')
 }

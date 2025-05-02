@@ -1,7 +1,7 @@
 import { useState } from 'react'
 //import { editWallet } from '../api/walletsApi'
 import { WalletModal } from './WalletModal'
-import { EditWalletModalProps } from '../interfaces/ChangeWalletModalProps'
+import type { EditWalletModalProps } from '../interfaces/ChangeWalletModalProps'
 
 export const EditWalletModal = ({
   onClose,

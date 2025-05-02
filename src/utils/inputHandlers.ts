@@ -12,11 +12,11 @@ export const limitedTextHandler = (
 
 export const decimalInputHandler = (
   setValue: (value: string) => void,
-  removeLeadingZeros: boolean = true,
-  maxDecimals: number = 2,
-  replaceComma: boolean = true,
-  autoPrefixZero: boolean = true,
-  limitLength: number = 12,
+  removeLeadingZeros = true,
+  maxDecimals = 2,
+  replaceComma = true,
+  autoPrefixZero = true,
+  limitLength = 12,
 ) => {
   const decimalRegex = new RegExp(`^\\d*(\\.\\d{0,${maxDecimals}})?$`)
 

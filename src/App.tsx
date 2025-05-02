@@ -4,8 +4,9 @@ import { Dashboard } from './pages/Dashboard'
 import { Settings } from './pages/Settings'
 import { Wallets } from './pages/Wallets'
 import { WalletDetail } from './pages/WalletDetail'
+import type { JSX } from 'react'
 
-function App() {
+function App(): JSX.Element {
   return (
     <Router>
       <MainLayout>

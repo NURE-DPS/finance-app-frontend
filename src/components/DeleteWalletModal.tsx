@@ -1,4 +1,4 @@
-import { DeleteWalletModalProps } from '../interfaces/ChangeWalletModalProps'
+import type { DeleteWalletModalProps } from '../interfaces/ChangeWalletModalProps'
 
 export const DeleteWalletModal = ({
   onClose,
