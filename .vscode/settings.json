@@ -6,5 +6,9 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
-  "typescript.validate.enable": false
+  "typescript.validate.enable": false,
+  "typescript.suggest.autoImports": true,
+  "javascript.suggest.autoImports": true,
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true,
+  "typescript.preferences.importModuleSpecifier": "non-relative"
 }

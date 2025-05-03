@@ -1,22 +1,25 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { MainLayout } from './layouts/MainLayout'
-import { Dashboard } from './pages/Dashboard'
-import { Settings } from './pages/Settings'
-import { Wallets } from './pages/Wallets'
-import { WalletDetail } from './pages/WalletDetail'
+import { Dashboard } from './pages/dashboard/Dashboard'
+import { Settings } from './pages/settings/Settings'
+import { Wallets } from './pages/wallets/Wallets'
+import { WalletDetail } from './pages/wallets/WalletDetail'
 import type { JSX } from 'react'
+import { AppProviders } from './providers/AppProviders'
 
 function App(): JSX.Element {
   return (
     <Router>
-      <MainLayout>
-        <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/wallets" element={<Wallets />} />
-          <Route path="/wallets/:id" element={<WalletDetail />} />
-        </Routes>
-      </MainLayout>
+      <AppProviders>
+        <MainLayout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/wallets" element={<Wallets />} />
+            <Route path="/wallets/:id" element={<WalletDetail />} />
+          </Routes>
+        </MainLayout>
+      </AppProviders>
     </Router>
   )
 }

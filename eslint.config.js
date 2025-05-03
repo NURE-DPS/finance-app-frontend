@@ -13,9 +13,9 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      parser, // вот сюда, а не просто "parser" в корне
+      parser,
       parserOptions: {
-        project: './tsconfig.app.json', // 👈 укажи путь к tsconfig
+        project: ['./tsconfig.app.json', './tsconfig.config.json'],
       },
       ecmaVersion: 2020,
       sourceType: 'module',
@@ -34,6 +34,7 @@ export default [
         { allowConstantExport: true },
       ],
       'prettier/prettier': 'error',
+      'no-undef': 'warn',
       '@typescript-eslint/no-unused-vars': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',
@@ -45,7 +46,7 @@ export default [
       '@typescript-eslint/consistent-type-imports': 'warn',
       '@typescript-eslint/no-unnecessary-type-assertion': 'warn',
       '@typescript-eslint/no-inferrable-types': 'warn',
-      '@typescript-eslint/explicit-function-return-type': 'warn',
+      '@typescript-eslint/explicit-function-return-type': 'off',
     },
   },
 ]

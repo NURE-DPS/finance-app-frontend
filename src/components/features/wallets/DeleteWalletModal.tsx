@@ -1,5 +1,5 @@
-import { ChangeWalletModalProps } from '../../interfaces/ChangeWalletModalProps'
-import { Button } from '../Button'
+import { Button } from '../../UI/Button'
+import { Modal } from '../../UI/Modal'
 
 export const DeleteWalletModal = ({
   onClose,
@@ -7,7 +7,9 @@ export const DeleteWalletModal = ({
   defname,
   defcurr,
   defbalance,
-}: ChangeWalletModalProps) => {
+  open,
+  setOpen,
+}) => {
   const handleDelete = () => {
     console.log({ defname, defcurr, defbalance })
     //const deletedWallet = deleteWallet({ defid })
@@ -15,10 +17,10 @@ export const DeleteWalletModal = ({
   }
 
   return (
-    <div className="bg-surface w-[600px] p-6 rounded-2xl shadow-lg mt-8 font-lato">
-      <div className=" text-h3">
+    <Modal open={open} setOpen={setOpen}>
+      <div className="font-montserrat text-text-primary text-h3">
         Are you sure you want to delete this wallet?
-        <p className="text-h2 font-bold mt-8">
+        <p className="text-h2 font-lato font-bold mt-8">
           <span>{defname}: </span>
           <span>
             {defbalance} {defcurr}
@@ -27,8 +29,8 @@ export const DeleteWalletModal = ({
       </div>
       <div className="grid grid-cols-2 text-surface mt-8 gap-4">
         <Button onClick={handleDelete} text="Yes" defcolor={false} />
-        <Button onClick={onClose} text="No" />
+        <Button onClick={() => setOpen(false)} text="No" />
       </div>
-    </div>
+    </Modal>
   )
 }

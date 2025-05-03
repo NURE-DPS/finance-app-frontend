@@ -1,3 +1,5 @@
+import * as motion from 'motion/react-client'
+
 interface ButtonProps {
   onClick: () => void
   text: string
@@ -25,7 +27,7 @@ export const Button = ({
   disabledCondition = false,
   deftype = false,
 }: ButtonProps) => {
-  const baseClasses = 'text-surface rounded-[12px] transition font-lato '
+  const baseClasses = 'text-button-text rounded-[12px] transition font-lato '
 
   const widthClass = fullwidth ? 'w-full' : ''
   const pClass = defpadding ? 'p-2' : 'px-4 py-2 mr-4'
@@ -34,25 +36,23 @@ export const Button = ({
 
   const disabled = isDisabled && disabledCondition
 
-  //нужен цвет для наведения на кнопку, а то он такой же как выключенная кнопка
-  // также я сделал временный цвет при наведении на красную кнопку
-
   const variantClass = disabled
-    ? 'bg-disabled text-color cursor-not-allowed'
+    ? 'bg-button-disabled !text-text-disabled cursor-not-allowed'
     : defcolor
-    ? 'bg-color hover:bg-disabled cursor-pointer'
-    : 'bg-error hover:bg-red-300 cursor-pointer'
+      ? 'bg-button-bg hover:bg-button-hover cursor-pointer'
+      : 'bg-error hover:bg-red-300 cursor-pointer'
 
   const combinedClasses = `${baseClasses} ${variantClass} ${widthClass} ${pClass} ${mtClass}`
 
   return (
-    <button
+    <motion.button
+      whileTap={{ scale: 0.8 }}
       className={combinedClasses}
       onClick={onClick}
       disabled={disabled}
       type={deftype ? 'button' : undefined}
     >
       {text}
-    </button>
+    </motion.button>
   )
 }

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 //import { createWallet } from '../../api/walletsApi'
-import { WalletModal } from './WalletModal'
+import { BaseWalletModal } from './BaseWalletModal'
 
-export const CreateWalletModal = ({ onClose }: { onClose: () => void }) => {
+export const CreateWalletModal = ({ open, setOpen }) => {
   const [name, setName] = useState('')
   const [currency, setCurrency] = useState('EUR')
   const [balance, setBalance] = useState('0.00')
@@ -10,10 +10,10 @@ export const CreateWalletModal = ({ onClose }: { onClose: () => void }) => {
   const handleSave = () => {
     console.log({ name, currency, balance })
     //const createdWallet = createWallet({ name, currency, balance })
-    onClose()
+    setOpen(false)
   }
   return (
-    <WalletModal
+    <BaseWalletModal
       title="Add Wallet"
       name={name}
       setName={setName}
@@ -21,7 +21,8 @@ export const CreateWalletModal = ({ onClose }: { onClose: () => void }) => {
       setCurrency={setCurrency}
       balance={balance}
       setBalance={setBalance}
-      onClose={onClose}
+      open={open}
+      setOpen={setOpen}
       onSave={handleSave}
     />
   )

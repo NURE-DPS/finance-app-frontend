@@ -1,4 +1,6 @@
-import { ElementType } from 'react'
+import * as motion from 'motion/react-client'
+
+import type { ElementType } from 'react'
 
 interface IconButtonProps {
   onClick: () => void
@@ -12,13 +14,17 @@ export const IconButton = ({
   isPadding = false,
 }: IconButtonProps) => {
   const baseClasses =
-    'text-color hover:text-disabled text-h2 transition cursor-pointer'
+    'text-text-primary hover:text-text-disabled text-h2 transition cursor-pointer'
   const paddingClass = isPadding ? 'p-2' : ''
   const combinedClasses = `${baseClasses} ${paddingClass}`
 
   return (
-    <button onClick={onClick} className={combinedClasses}>
+    <motion.button
+      whileTap={{ scale: 0.8 }}
+      onClick={onClick}
+      className={combinedClasses}
+    >
       <Icon />
-    </button>
+    </motion.button>
   )
 }

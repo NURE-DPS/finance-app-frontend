@@ -13,7 +13,7 @@
   --text-body: 1rem;
   --text-caption: 0.75rem;
   /* COLORS */
-  --color-background: #121212;
+  /* --color-background: #121212;
   --color-surface: #1A1A1A;
   --color-color: #E0E0E0;
   --color-subtext: #A0A0A0;
@@ -26,7 +26,55 @@
   --color-success: #98C379;
   --color-error: #E06C75;
   --color-warning: #E5C07B;
-  --color-info: #61AFEF;
+  --color-info: #61AFEF; */
+  /* Base */
+  --color-bg: #0e0e10; /* Основной фон */
+  --color-surface: #16171a; /* Поверхность карточек, панелей */
+  --color-elevation-1: #1e1f23; /* Приподнятые элементы */
+  --color-elevation-2: #2a2b30; /* Модальные окна, dropdown */
+
+  --color-border: #2f2f35; /* Границы */
+  --color-divider: #242529; /* Разделители */
+
+  /* Text */
+  --color-text-primary: #e6e6e6; /* Основной текст */
+  --color-text-secondary: #a0a0a5; /* Вторичный текст */
+  --color-text-disabled: #5c5c61; /* Отключённый текст */
+  --color-text-inverted: #0e0e10; /* Текст на светлой/акцентной поверхности */
+
+  /* Primary UI Colors */
+  --color-primary: #7aa2f7; /* Основной цвет (кнопки, выделения) */
+  --color-primary-hover: #8aadf4; /* Наведение */
+  --color-primary-active: #6c96dd; /* Активное состояние */
+  --color-primary-disabled: #3f4a6d; /* Отключенная кнопка */
+
+  /* Secondary / Accent */
+  --color-accent: #cba6f7; /* Вторичный акцент */
+  --color-accent-hover: #d8bff9;
+  --color-accent-active: #b895e0;
+
+  /* Status Colors */
+  --color-success: #a6e3a1;
+  --color-success-bg: #2e4431;
+  --color-error: #f38ba8;
+  --color-error-bg: #442e32;
+  --color-warning: #f9e2af;
+  --color-warning-bg: #443c2e;
+  --color-info: #89b4fa;
+  --color-info-bg: #2e3a44;
+
+  /* Button States */
+  --color-button-bg: var(--color-primary);
+  --color-button-hover: var(--color-primary-hover);
+  --color-button-active: var(--color-primary-active);
+  --color-button-disabled: var(--color-primary-disabled);
+  --color-button-text: var(--color-text-inverted);
+
+  /* Inputs */
+  --color-input-bg: var(--color-surface);
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-primary);
+  --color-input-placeholder: var(--color-text-secondary);
 }
 body,
 html {
@@ -39,4 +87,22 @@ body,
 #root {
   min-height: 100%;
   height: 100%;
+}
+
+[data-state='open'],
+[data-state='closed'],
+[data-enter],
+[data-leave],
+[data-closed] {
+  transition: all 0.3s ease-in-out;
+}
+
+[data-closed] {
+  opacity: 0;
+  transform: translateY(1rem) scale(0.95);
+}
+
+[data-enter] {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
