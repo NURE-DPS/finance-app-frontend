@@ -6,7 +6,7 @@ import { Wallets } from './pages/wallets/Wallets'
 import { WalletDetail } from './pages/wallets/WalletDetail'
 import type { JSX } from 'react'
 import { AppProviders } from './providers/AppProviders'
-import Login from './pages/auth/login'
+import Login from './pages/auth/LogIn'
 
 function App(): JSX.Element {
   return (
