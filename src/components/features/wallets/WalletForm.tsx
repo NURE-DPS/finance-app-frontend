@@ -58,7 +58,7 @@ export const WalletForm = ({
             },
           })}
           className=" text-text-primary w-full p-2 border-2 border-border rounded mt-1"
-          placeholder="Enter name"
+          placeholder="Enter wallet name"
         />
         {errors.name && (
           <p className="text-error text-sm mt-1">{errors.name.message}</p>
