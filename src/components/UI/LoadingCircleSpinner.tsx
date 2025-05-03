@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 
-export function LoadingCircleSpinner() {
+export const LoadingCircleSpinner = () => {
   return (
     <div className="flex items-center justify-center w-full h-full">
       <motion.div

@@ -1,7 +1,13 @@
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { AnimatePresence, motion } from 'motion/react'
 
-export const Modal = ({ children, open, setOpen }) => {
+interface ModalProps {
+  children: any
+  open: boolean
+  setOpen: (value: boolean) => void
+}
+
+export const Modal = ({ children, open, setOpen }: ModalProps) => {
   return (
     <>
       <AnimatePresence>
