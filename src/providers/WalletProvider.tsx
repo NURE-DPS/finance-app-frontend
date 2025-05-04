@@ -8,9 +8,6 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     wallets[0].id,
   )
 
-  const setSelectedWalletById = (id: string) => {
-    setSelectedWalletId(id)
-  }
   const selectedWallet = wallets.find(
     (wallet) => wallet.id === selectedWalletId,
   )
@@ -21,7 +18,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         wallets,
         selectedWalletId,
         selectedWallet,
-        setSelectedWalletById,
+        setSelectedWalletId,
       }}
     >
       {children}

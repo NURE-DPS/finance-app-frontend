@@ -13,11 +13,8 @@ export const WalletDetail = () => {
   const [isDeleteWalletModalOpen, setIsDeleteWalletModalOpen] = useState(false)
 
   //пока что закоменчу selectedWallet, пока он не нужен
-  const {
-    wallets,
-    selectedWalletId,
-    /*selectedWallet,*/ setSelectedWalletById,
-  } = useWallet()
+  const { wallets, selectedWalletId, selectedWallet, setSelectedWalletId } =
+    useWallet()
 
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
@@ -26,17 +23,22 @@ export const WalletDetail = () => {
     useState(false)
 
   useEffect(() => {
-    if (id) setSelectedWalletById(id)
+    if (id) setSelectedWalletId(id)
   }, [id])
 
   const handleWalletChange = async (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const newId = event.target.value
-    setSelectedWalletById(newId)
+    setSelectedWalletId(newId)
     await navigate(`/wallets/${newId}`)
   }
-
+  if (!selectedWallet)
+    return (
+      <div className="font-montserrat text-display text-center">
+        Page not found
+      </div>
+    )
   return (
     <div className="flex text-text-primary gap-8">
       <div className="w-3/5">
@@ -63,6 +65,10 @@ export const WalletDetail = () => {
             <EditWalletModal
               open={isEditWalletModalOpen}
               setOpen={setIsEditWalletModalOpen}
+              id={selectedWalletId}
+              name={selectedWallet.name}
+              currency={selectedWallet.currency}
+              balance={selectedWallet.balance}
             />
 
             <IconButton
@@ -73,6 +79,10 @@ export const WalletDetail = () => {
             <DeleteWalletModal
               open={isDeleteWalletModalOpen}
               setOpen={setIsDeleteWalletModalOpen}
+              id={selectedWalletId}
+              name={selectedWallet.name}
+              currency={selectedWallet.currency}
+              balance={selectedWallet.balance}
             />
           </div>
         </div>

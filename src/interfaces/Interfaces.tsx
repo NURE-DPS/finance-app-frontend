@@ -1,12 +1,20 @@
-export interface OpenModal {
+export interface ModalControl {
   open: boolean
   setOpen: (value: boolean) => void
 }
 
-//проверить работает ли interface вместо type для WalletType
 export interface WalletType {
   id: string
   name: string
   balance: number
   currency: string
+}
+
+export interface ChangeWalletProps {
+  open: boolean
+  setOpen: (value: boolean) => void
+  id: string
+  name: string
+  currency: string
+  balance: number
 }

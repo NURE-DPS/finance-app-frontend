@@ -1,8 +1,8 @@
 //import { createWallet } from '../../api/walletsApi'
 import { BaseWalletModal } from './BaseWalletModal'
-import { OpenModal } from '../../../interfaces/Interfaces'
+import { ModalControl } from '../../../interfaces/Interfaces'
 
-export const CreateWalletModal = ({ open, setOpen }: OpenModal) => {
+export const CreateWalletModal = ({ open, setOpen }: ModalControl) => {
   const handleSave = (data: {
     name: string
     currency: string
