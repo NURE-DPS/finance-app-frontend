@@ -1,9 +1,9 @@
 import { LuX } from 'react-icons/lu'
 import { IconButton } from '../../UI/IconButton'
 import { Modal } from '../../UI/Modal'
-import { OpenModal } from '../../../interfaces/Interfaces'
+import { ModalControl } from '../../../interfaces/Interfaces'
 
-export const CreateTransModal = ({ open, setOpen }: OpenModal) => {
+export const CreateTransModal = ({ open, setOpen }: ModalControl) => {
   return (
     <Modal open={open} setOpen={setOpen}>
       <div className="flex justify-between items-center mb-4 text-text-primary">
