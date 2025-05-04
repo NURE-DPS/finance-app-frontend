@@ -1,13 +1,12 @@
 import * as motion from 'motion/react-client'
 
 interface ButtonProps {
-  onClick: () => void
+  onClick?: () => void
   text: string
   defcolor?: boolean
   fullwidth?: boolean
   defpadding?: boolean
   margtop?: boolean
-  isDisabled?: boolean
   disabledCondition?: boolean
   deftype?: boolean //если потом будет необходимо, можно будет вообще убрать этот пропс
   //он нужен только чтобы консоль не ругалась когда нажимаю кнопку Save(пока что только для создания и редактирования кошелька),
@@ -23,7 +22,6 @@ export const Button = ({
   fullwidth = true,
   defpadding = true,
   margtop = false,
-  isDisabled = false,
   disabledCondition = false,
   deftype = false,
 }: ButtonProps) => {
@@ -34,7 +32,7 @@ export const Button = ({
 
   const mtClass = margtop ? 'mt-4' : ''
 
-  const disabled = isDisabled && disabledCondition
+  const disabled = disabledCondition
 
   const variantClass = disabled
     ? 'bg-button-disabled !text-text-disabled cursor-not-allowed'

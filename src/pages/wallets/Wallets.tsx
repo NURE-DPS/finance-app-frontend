@@ -1,19 +1,17 @@
-//import { useEffect, useState } from 'react'
 import { WalletCard } from '../../components/features/wallets/WalletCard'
-//import { fetchWallets } from '../api/walletsApi'
-import { wallets } from '../../stores/wallets'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import { useState, useEffect } from 'react'
 import { LoadingCircleSpinner } from '../../components/UI/LoadingCircleSpinner'
+import { useWallet } from '../../hooks/UseWallet'
 // import { fetchWallets } from '../../api/wallets/walletsApi'
 
 export const Wallets = () => {
   const { setTitle } = usePageTitle()
-  //потом будет через useContext
-  // const [wallets, setWallets] = useState<any[]>([])
+  const { wallets } = useWallet()
+
   const [loading, setLoading] = useState(true)
 
-  //раскоментить после кнопок РАБОТАЕТ
+  //реализация связи с бэкэндом РАБОТАЕТ
   // useEffect(() => {
   //   fetchWallets()
   //     .then((response) => {

@@ -1,37 +1,38 @@
-import { useState } from 'react'
 //import { editWallet } from '../../api/walletsApi'
 import { BaseWalletModal } from './BaseWalletModal'
+import { OpenModal } from '../../../interfaces/Interfaces'
+import { useWallet } from '../../../hooks/UseWallet'
 
-export const EditWalletModal = ({
-  defname,
-  defcurr,
-  defbalance,
-  open,
-  setOpen,
-}) => {
-  const [name, setName] = useState(defname)
-  const [currency, setCurrency] = useState(defcurr)
-  const [balance, setBalance] = useState(defbalance)
+export const EditWalletModal = ({ open, setOpen }: OpenModal) => {
+  const { selectedWallet } = useWallet()
 
-  const handleSave = () => {
-    console.log({ name, currency, balance })
-    //const createdWallet = editWallet({defid, name, currency, balance })
+  if (!selectedWallet) return null
+
+  const handleSave = (
+    id: string,
+    data: {
+      name: string
+      currency: string
+      balance: string
+    },
+  ) => {
+    console.log('Edit wallet:', id, 'New Data:', data)
+    //const editedWallet = editWallet({id, name, currency, balance })
     setOpen(false)
   }
 
   return (
     <BaseWalletModal
       title="Edit Wallet"
-      name={name}
-      setName={setName}
-      currency={currency}
-      setCurrency={setCurrency}
-      balance={balance}
-      setBalance={setBalance}
-      onSave={handleSave}
+      onSave={(data) => handleSave(selectedWallet.id, data)}
       open={open}
       setOpen={setOpen}
-      showCancel
+      defaultValues={{
+        name: selectedWallet.name,
+        currency: selectedWallet.currency,
+        balance: selectedWallet.balance.toString(),
+      }}
+      showCancel={true}
     />
   )
 }

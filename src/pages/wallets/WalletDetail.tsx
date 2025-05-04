@@ -1,36 +1,39 @@
-import { wallets } from '../../stores/wallets'
 import { useNavigate, useParams } from 'react-router-dom'
-import { /*useEffect,*/ useState } from 'react'
-import CreateTransModal from '../../components/features/transactions/CreateTransModal'
+import { useEffect, useState } from 'react'
+import { CreateTransModal } from '../../components/features/transactions/CreateTransModal'
 import { LuTrash2, LuFolderPen } from 'react-icons/lu'
 import { EditWalletModal } from '../../components/features/wallets/EditWalletModal'
 import { DeleteWalletModal } from '../../components/features/wallets/DeleteWalletModal'
 import { Button } from '../../components/UI/Button'
 import { IconButton } from '../../components/UI/IconButton'
+import { useWallet } from '../../hooks/UseWallet'
 
 export const WalletDetail = () => {
   const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false)
   const [isDeleteWalletModalOpen, setIsDeleteWalletModalOpen] = useState(false)
 
+  //пока что закоменчу selectedWallet, пока он не нужен
+  const {
+    wallets,
+    selectedWalletId,
+    /*selectedWallet,*/ setSelectedWalletById,
+  } = useWallet()
+
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
 
-  //сделал работу со строчными айди - хз правильно или нет
-  const [selectedWalletId, setSelectedWalletId] = useState<string>(id || '')
   const [isCreateTransactionModelOpen, setIsCreateTransactionModelOpen] =
     useState(false)
 
-  // Затычка (Найти текущий выбранный кошелек) - потом скорее всего поменяется, когда будет
-  //делаться привязка к бэкэнду
-  const selectedWallet = wallets.find(
-    (wallet) => wallet.id === selectedWalletId,
-  )
+  useEffect(() => {
+    if (id) setSelectedWalletById(id)
+  }, [id])
 
   const handleWalletChange = async (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const newId = event.target.value
-    setSelectedWalletId(newId)
+    setSelectedWalletById(newId)
     await navigate(`/wallets/${newId}`)
   }
 
@@ -58,10 +61,6 @@ export const WalletDetail = () => {
               isPadding={true}
             />
             <EditWalletModal
-              defid={selectedWallet.id}
-              defname={selectedWallet.name}
-              defcurr={selectedWallet.currency}
-              defbalance={selectedWallet.balance.toString()}
               open={isEditWalletModalOpen}
               setOpen={setIsEditWalletModalOpen}
             />
@@ -72,10 +71,6 @@ export const WalletDetail = () => {
               isPadding={true}
             />
             <DeleteWalletModal
-              defid={selectedWallet.id}
-              defname={selectedWallet.name}
-              defcurr={selectedWallet.currency}
-              defbalance={selectedWallet.balance.toString()}
               open={isDeleteWalletModalOpen}
               setOpen={setIsDeleteWalletModalOpen}
             />
