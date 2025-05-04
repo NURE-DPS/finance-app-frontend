@@ -12,7 +12,6 @@ export const WalletDetail = () => {
   const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false)
   const [isDeleteWalletModalOpen, setIsDeleteWalletModalOpen] = useState(false)
 
-  //пока что закоменчу selectedWallet, пока он не нужен
   const { wallets, selectedWalletId, selectedWallet, setSelectedWalletId } =
     useWallet()
 
