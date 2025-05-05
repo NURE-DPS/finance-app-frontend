@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/UI/Button'
 import { LuEye, LuEyeOff } from 'react-icons/lu'
 import { useState } from 'react'
+import { useSignUp } from '../../hooks/useSignUp'
 
 type FormValues = {
   name: string
