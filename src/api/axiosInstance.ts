@@ -1,9 +1,8 @@
-// src/api/axiosInstance.ts
 import axios from 'axios'
 import { getToken /*,  removeToken */ } from '../utils/auth'
 
 const api = axios.create({
-  baseURL: 'https://finance-app-backend-dev.onrender.com/api',
+  baseURL: 'http://localhost:8000/api',
 })
 
 api.interceptors.request.use((config) => {
