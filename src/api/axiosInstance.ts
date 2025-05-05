@@ -2,8 +2,7 @@ import axios from 'axios'
 import { getToken /*,  removeToken */ } from '../utils/auth'
 
 const api = axios.create({
-  // baseURL: 'http://localhost:8000/api',
-  baseURL: 'https://finance-app-backend-dev.onrender.com/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 })
 
 api.interceptors.request.use((config) => {
