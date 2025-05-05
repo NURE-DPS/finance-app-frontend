@@ -7,6 +7,7 @@ import {
   LuWallet,
 } from 'react-icons/lu'
 import { NavLink } from 'react-router-dom'
+import { useLogOut } from '../../hooks/useLogOut'
 
 export const Sidebar = () => {
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
@@ -15,6 +16,8 @@ export const Sidebar = () => {
         ? 'bg-accent text-text-inverted'
         : 'text-text-secondary hover:bg-elevation-1 hover:text-text-primary'
     }`
+
+  const { handleLogOut } = useLogOut()
 
   return (
     <div className="basis-1/7 min-h-screen h-full bg-elevation-1 p-6 text-text-primary shadow-inner border-r border-border flex flex-col justify-between">
@@ -63,12 +66,15 @@ export const Sidebar = () => {
         <motion.div whileTap={{ scale: 0.9 }}>
           {/* поменять на логин */}
           {/* тут реализовать удаление токена из LocalStorage */}
-          <NavLink to="/signup" className={linkClasses}>
-            <div className="flex items-center gap-2">
+          <button
+            onClick={handleLogOut} // Викликаємо хендлер з хука
+            className={linkClasses({ isActive: false })}
+          >
+            <div className="flex items-center gap-2 cursor-pointer">
               <LuLogOut size={20} />
               Log Out
             </div>
-          </NavLink>
+          </button>
         </motion.div>
       </div>
     </div>
