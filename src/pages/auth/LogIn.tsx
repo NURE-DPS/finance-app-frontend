@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/UI/Button'
 import { LuEye, LuEyeOff } from 'react-icons/lu'
 import { useState } from 'react'
+import { useSignUp } from '../../hooks/useSignUp'
 
 type FormValues = {
   name: string
@@ -13,6 +13,7 @@ type FormValues = {
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
+  const { handleSignUp } = useSignUp()
 
   const {
     register,
@@ -23,12 +24,7 @@ export default function Login() {
     mode: 'onChange',
   })
 
-  const navigate = useNavigate()
-
-  const onSubmit = (data: FormValues) => {
-    console.log('User data:', data)
-    navigate('/')
-  }
+  
 
   const nameValue = watch('name')
   const emailValue = watch('email')
@@ -42,7 +38,7 @@ export default function Login() {
         </h1>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(handleSignUp)}
           className="bg-elevation-1 p-8 rounded-2xl shadow-md space-y-6"
         >
           <div>
