@@ -17,7 +17,7 @@ export const useSignUp = () => {
     toast.promise(promise, {
       loading: 'Registering...',
       success: () => {
-        const token = response.data.data?.session?.access_token
+        const token = promise.data.data?.session?.access_token
         if (token) {
           login(token)
           navigate('/')
