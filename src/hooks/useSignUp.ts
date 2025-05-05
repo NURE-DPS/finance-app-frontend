@@ -1,4 +1,4 @@
-import { toast } from 'sonner'
+
 import { signUp } from '../api/auth/authApi'
 import { useNavigate } from 'react-router-dom'
 
@@ -13,12 +13,13 @@ export const useSignUp = () => {
     try {
       const response = await signUp(data)
       if (response.status === 201) {
-        toast.success('Signup successful!')
+        // сюда не стоит добавлять тоаст, потому что оно все равно переадрессуется 
         navigate('/')
       } else {
-        alert(response.data.error || 'Signup failed')
+        alert(response.data.error || 'Signup failed') // до этого if оно не доходит
       }
     } catch (error: any) {
+      // отлавливаем ошибки все тут и тоаст показываем тоже тут
       const message =
         error.response?.data?.error ||
         error.response?.data?.message ||
