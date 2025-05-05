@@ -1,17 +1,11 @@
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { SignUpForm } from '../../components/features/signup/SignUpForm'
-import { FormValues } from '../../interfaces/Interfaces'
+import { useSignUp } from '../../hooks/useSignUp'
 
 export const SignUp = () => {
   const navigate = useNavigate()
-
-  //тут создать пользователя, сохранить токен в localStorage и перенаправить на '/'
-  const onSubmit = (data: FormValues) => {
-    console.log('User data:', data)
-    //getToken/saveToken
-    navigate('/')
-  }
+    const { handleSignUp } = useSignUp()
 
   return (
     <div className="w-screen h-full min-h-full box-border flex items-center justify-center bg-bg">
@@ -21,7 +15,7 @@ export const SignUp = () => {
         </h1>
 
         <SignUpForm
-          onSubmit={onSubmit}
+          onSubmit={handleSignUp}
           onBottomTextClick={() => navigate('/login')}
         />
 
