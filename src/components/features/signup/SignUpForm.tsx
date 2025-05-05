@@ -120,7 +120,7 @@ export const SignUpForm = ({
           <button
             type="button"
             onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-text-primary transition"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 text-text-secondary hover:text-text-primary transition cursor-pointer"
           >
             {showPassword ? <LuEye size={24} /> : <LuEyeOff size={24} />}
           </button>

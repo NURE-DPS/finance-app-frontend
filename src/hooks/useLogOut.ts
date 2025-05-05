@@ -1,4 +1,4 @@
-// src/hooks/useLogOut.ts
+import { toast } from 'sonner'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
 
@@ -7,8 +7,13 @@ export const useLogOut = () => {
   const navigate = useNavigate()
 
   const handleLogOut = () => {
-    logout()
-    navigate('/login')
+    try {
+      logout()
+      navigate('/login')
+      toast.success('You have been logged out.')
+    } catch (error) {
+      toast.error('Unexpected error during logout.')
+    }
   }
 
   return { handleLogOut }

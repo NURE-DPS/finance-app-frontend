@@ -18,14 +18,6 @@ export const SignUp = () => {
           onSubmit={handleSignUp}
           onBottomTextClick={() => navigate('/login')}
         />
-
-        {/* затычка для простоты перемещения между страницами, потом - убрать */}
-        <Link
-          to="/"
-          className="bg-button-bg hover:bg-button-hover cursor-pointer text-button-text font-lato p-3 rounded-[12px] transition text-body"
-        >
-          Sign Up
-        </Link>
       </div>
     </div>
   )
