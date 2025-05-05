@@ -1,4 +1,4 @@
-
+import { toast } from 'sonner'
 import { signUp } from '../api/auth/authApi'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,21 +10,27 @@ export const useSignUp = () => {
     email: string
     password: string
   }) => {
-    try {
-      const response = await signUp(data)
-      if (response.status === 201) {
-        // сюда не стоит добавлять тоаст, потому что оно все равно переадрессуется 
+    const promise = signUp(data)
+
+    toast.promise(promise, {
+      loading: 'Registering...',
+      success: () => {
         navigate('/')
-      } else {
-        alert(response.data.error || 'Signup failed') // до этого if оно не доходит
-      }
-    } catch (error: any) {
-      // отлавливаем ошибки все тут и тоаст показываем тоже тут
-      const message =
-        error.response?.data?.error ||
-        error.response?.data?.message ||
-        'Unexpected error during signup'
-      alert(message)
+        return 'Registration was successful!'
+      },
+      error: (error: any) => {
+        const message =
+          error.response?.data?.error ||
+          error.response?.data?.message ||
+          'Unexpected error during signup'
+        return message
+      },
+    })
+
+    try {
+      await promise
+    } catch {
+      // Ошибку уже поймали в toast.error — ничего не нужно
     }
   }
 

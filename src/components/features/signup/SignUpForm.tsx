@@ -131,7 +131,6 @@ export const SignUpForm = ({
         )}
       </div>
       <Button text={buttonText} disabledCondition={!isValid} />
-      {/* затычка для будущей кнопки авторизации */}
       <div
         className="text-lato text-text-primary text-center cursor-pointer hover:underline hover:text-text-secondary"
         onClick={onBottomTextClick}
