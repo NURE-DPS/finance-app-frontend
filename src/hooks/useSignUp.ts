@@ -1,3 +1,4 @@
+import { toast } from 'sonner'
 import { signUp } from '../api/auth/authApi'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
@@ -11,25 +12,30 @@ export const useSignUp = () => {
     email: string
     password: string
   }) => {
-    try {
-      const response = await signUp(data)
+    const promise = signUp(data)
 
-      if (response.status === 201) {
+    toast.promise(promise, {
+      loading: 'Registering...',
+      success: () => {
         const token = response.data.data?.session?.access_token
         if (token) {
           login(token)
           navigate('/')
+          return 'Registration was successful!'
         }
-      } else {
-        alert(response.data.error || 'Signup failed')
-      }
-    } catch (error: any) {
-      const message =
-        error.response?.data?.error ||
-        error.response?.data?.message ||
-        'Unexpected error during signup'
-      alert(message)
-    }
+      },
+      error: (error: any) => {
+        const message =
+          error.response?.data?.error ||
+          error.response?.data?.message ||
+          'Unexpected error during signup'
+        return message
+      },
+    })
+
+    try {
+      await promise
+    } catch {}
   }
 
   return { handleSignUp }

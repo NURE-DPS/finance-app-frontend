@@ -9,11 +9,14 @@ import { AppProviders } from './providers/AppProviders'
 import { SignUp } from './pages/signup/SignUp'
 import { LogIn } from './pages/login/LogIn'
 import { ProtectedRoute } from './ProtectedRoute'
+import { CustomToaster } from './components/UI/CustomToaster'
+
 
 function App(): JSX.Element {
   return (
     <Router>
       <AppProviders>
+        <CustomToaster />
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
