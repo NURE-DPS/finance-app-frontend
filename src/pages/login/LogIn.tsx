@@ -1,16 +1,10 @@
 import { useNavigate } from 'react-router-dom'
 import { SignUpForm } from '../../components/features/signup/SignUpForm'
-import { FormValues } from '../../interfaces/Interfaces'
+import { useLogIn } from '../../hooks/useLogIn'
 
 export const LogIn = () => {
   const navigate = useNavigate()
-
-  //тут получить токен по данным, которые ввел пользователь, сохранить токен в localStorage и перенаправить на '/'
-  const onSubmit = (data: FormValues) => {
-    console.log('User data:', data)
-    //getToken/saveToken
-    navigate('/')
-  }
+  const { handleLogIn } = useLogIn()
 
   return (
     <div className="w-screen h-full min-h-full box-border flex items-center justify-center bg-bg">
@@ -20,7 +14,7 @@ export const LogIn = () => {
         </h1>
 
         <SignUpForm
-          onSubmit={onSubmit}
+          onSubmit={handleLogIn}
           showNameField={false}
           buttonText="Log In"
           bottomText="Don’t have an account?"

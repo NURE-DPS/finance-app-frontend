@@ -8,7 +8,9 @@ import type { JSX } from 'react'
 import { AppProviders } from './providers/AppProviders'
 import { SignUp } from './pages/signup/SignUp'
 import { LogIn } from './pages/login/LogIn'
+import { ProtectedRoute } from './ProtectedRoute'
 import { CustomToaster } from './components/UI/CustomToaster'
+
 
 function App(): JSX.Element {
   return (
@@ -18,17 +20,20 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
+
           <Route
             path="*"
             element={
-              <MainLayout>
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/wallets" element={<Wallets />} />
-                  <Route path="/wallets/:id" element={<WalletDetail />} />
-                </Routes>
-              </MainLayout>
+              <ProtectedRoute>
+                <MainLayout>
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/wallets" element={<Wallets />} />
+                    <Route path="/wallets/:id" element={<WalletDetail />} />
+                  </Routes>
+                </MainLayout>
+              </ProtectedRoute>
             }
           />
         </Routes>

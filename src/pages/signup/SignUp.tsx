@@ -5,7 +5,7 @@ import { useSignUp } from '../../hooks/useSignUp'
 
 export const SignUp = () => {
   const navigate = useNavigate()
-    const { handleSignUp } = useSignUp()
+  const { handleSignUp } = useSignUp()
 
   return (
     <div className="w-screen h-full min-h-full box-border flex items-center justify-center bg-bg">
