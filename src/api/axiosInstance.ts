@@ -3,7 +3,7 @@ import axios from 'axios'
 import { getToken /*,  removeToken */ } from '../utils/auth'
 
 const api = axios.create({
-  baseURL: 'https://finance-app-backend-dev.onrender.com',
+  baseURL: 'https://finance-app-backend-dev.onrender.com/api',
 })
 
 api.interceptors.request.use((config) => {
