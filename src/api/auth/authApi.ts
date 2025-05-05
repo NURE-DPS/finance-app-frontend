@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api',
+  baseURL: 'http://localhost:8000/api/auth',
 })
 
 export const signUp = async (signUpData: {
@@ -9,5 +9,9 @@ export const signUp = async (signUpData: {
   email: string
   password: string
 }) => {
-  return await api.post('/auth/signup', signUpData)
+  return await api.post('/signup', signUpData)
+}
+
+export const logIn = async (logInData: { email: string; password: string }) => {
+  return await api.post('/signin', logInData)
 }
