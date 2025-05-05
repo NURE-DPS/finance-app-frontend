@@ -12,30 +12,28 @@ export const useSignUp = () => {
     email: string
     password: string
   }) => {
-    const promise = signUp(data)
-
-    toast.promise(promise, {
-      loading: 'Registering...',
-      success: () => {
-        const token = promise.data.data?.session?.access_token
+    await toast.promise(
+      signUp(data).then((response) => {
+        const token =
+          response.data?.token || response.data?.data?.session?.access_token
         if (token) {
           login(token)
           navigate('/')
-          return 'Registration was successful!'
         }
+        return response
+      }),
+      {
+        loading: 'Registering...',
+        success: () => 'Registration was successful!',
+        error: (error: any) => {
+          const message =
+            error.response?.data?.error ||
+            error.response?.data?.message ||
+            'Unexpected error during signup'
+          return message
+        },
       },
-      error: (error: any) => {
-        const message =
-          error.response?.data?.error ||
-          error.response?.data?.message ||
-          'Unexpected error during signup'
-        return message
-      },
-    })
-
-    try {
-      await promise
-    } catch {}
+    )
   }
 
   return { handleSignUp }
