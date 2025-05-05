@@ -18,3 +18,9 @@ export interface ChangeWalletProps {
   currency: string
   balance: number
 }
+
+export type FormValues = {
+  name: string
+  email: string
+  password: string
+}

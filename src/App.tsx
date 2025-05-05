@@ -6,14 +6,16 @@ import { Wallets } from './pages/wallets/Wallets'
 import { WalletDetail } from './pages/wallets/WalletDetail'
 import type { JSX } from 'react'
 import { AppProviders } from './providers/AppProviders'
-import Login from './pages/auth/LogIn'
+import { SignUp } from './pages/signup/SignUp'
+import { LogIn } from './pages/login/LogIn'
 
 function App(): JSX.Element {
   return (
     <Router>
       <AppProviders>
         <Routes>
-          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
           <Route
             path="*"
             element={

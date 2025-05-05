@@ -61,7 +61,9 @@ export const Sidebar = () => {
           </NavLink>
         </motion.div>
         <motion.div whileTap={{ scale: 0.9 }}>
-          <NavLink to="/login" className={linkClasses}>
+          {/* поменять на логин */}
+          {/* тут реализовать удаление токена из LocalStorage */}
+          <NavLink to="/signup" className={linkClasses}>
             <div className="flex items-center gap-2">
               <LuLogOut size={20} />
               Log Out
