@@ -8,13 +8,11 @@ export const useLogIn = () => {
 
   const handleLogIn = async (data: { email: string; password: string }) => {
     try {
-      console.log(data)
       const response = await logIn(data)
 
       if (response.status === 200) {
         const token = response.data?.token
         if (token) {
-          console.log('✅ Token received:', token)
           login(token)
           navigate('/')
         } else {
