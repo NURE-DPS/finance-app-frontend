@@ -1,15 +1,25 @@
 import { logIn } from '../api/auth/authApi'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from './useAuth'
 
 export const useLogIn = () => {
   const navigate = useNavigate()
+  const { login } = useAuth()
 
   const handleLogIn = async (data: { email: string; password: string }) => {
-    console.log(data)
     try {
+      console.log(data)
       const response = await logIn(data)
+
       if (response.status === 200) {
-        navigate('/')
+        const token = response.data?.token
+        if (token) {
+          console.log('✅ Token received:', token)
+          login(token)
+          navigate('/')
+        } else {
+          // тут тоаст
+        }
       } else {
         alert(response.data.error || 'Login failed')
       }
