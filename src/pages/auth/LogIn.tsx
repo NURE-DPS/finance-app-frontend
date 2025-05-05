@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/UI/Button'
 import { LuEye, LuEyeOff } from 'react-icons/lu'
 import { useState } from 'react'
-import { signUp } from '../../api/auth/authApi'
-import { useSignUp } from '../../hooks/useSignUp'
-import { Toaster } from 'sonner'
 
 type FormValues = {
   name: string
