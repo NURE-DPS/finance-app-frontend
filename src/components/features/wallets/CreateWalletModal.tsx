@@ -1,4 +1,4 @@
-//import { createWallet } from '../../api/walletsApi'
+//import { createWallet } from '../../api/wallets/walletsApi'
 import { BaseWalletModal } from './BaseWalletModal'
 import { ModalControl } from '../../../interfaces/Interfaces'
 

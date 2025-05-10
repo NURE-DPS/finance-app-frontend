@@ -64,8 +64,6 @@ export const Sidebar = () => {
           </NavLink>
         </motion.div>
         <motion.div whileTap={{ scale: 0.9 }}>
-          {/* поменять на логин */}
-          {/* тут реализовать удаление токена из LocalStorage */}
           <button
             onClick={handleLogOut} // Викликаємо хендлер з хука
             className={linkClasses({ isActive: false })}
