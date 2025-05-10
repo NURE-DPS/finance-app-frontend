@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { SignUpForm } from '../../components/features/signup/SignUpForm'
-import { useLogIn } from '../../hooks/useLogIn'
+import { useLogIn } from '../../hooks/auth/useLogIn'
 
 export const LogIn = () => {
   const navigate = useNavigate()

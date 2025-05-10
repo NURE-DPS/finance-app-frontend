@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from './hooks/useAuth'
+import { useAuth } from './hooks/auth/useAuth'
 import { JSX } from 'react'
 import api from './api/axiosInstance'
 import { LoadingCircleSpinner } from './components/UI/LoadingCircleSpinner'
-
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated, logout } = useAuth()

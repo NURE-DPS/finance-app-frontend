@@ -2,7 +2,7 @@ import { WalletCard } from '../../components/features/wallets/WalletCard'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import { useState, useEffect } from 'react'
 import { LoadingCircleSpinner } from '../../components/UI/LoadingCircleSpinner'
-import { useWallet } from '../../hooks/UseWallet'
+import { useWallet } from '../../hooks/wallets/UseWallet'
 // import { fetchWallets } from '../../api/wallets/walletsApi'
 
 export const Wallets = () => {

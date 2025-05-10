@@ -1,21 +1,16 @@
 import { toast } from 'sonner'
-import { signUp } from '../api/auth/authApi'
+import { logIn } from '../../api/auth/authApi'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
 
-export const useSignUp = () => {
+export const useLogIn = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
 
-  const handleSignUp = async (data: {
-    name: string
-    email: string
-    password: string
-  }) => {
+  const handleLogIn = async (data: { email: string; password: string }) => {
     await toast.promise(
-      signUp(data).then((response) => {
-        const token =
-          response.data?.token || response.data?.data?.session?.access_token
+      logIn(data).then((response) => {
+        const token = response.data?.token
         if (token) {
           login(token)
           navigate('/')
@@ -23,18 +18,18 @@ export const useSignUp = () => {
         return response
       }),
       {
-        loading: 'Registering...',
-        success: () => 'Registration was successful!',
+        loading: 'Logging in...',
+        success: () => 'Login successful!',
         error: (error: any) => {
           const message =
             error.response?.data?.error ||
             error.response?.data?.message ||
-            'Unexpected error during signup'
+            'Unexpected error during login'
           return message
         },
       },
     )
   }
 
-  return { handleSignUp }
+  return { handleLogIn }
 }
