@@ -14,6 +14,7 @@ interface TransFormProps {
   onSubmit: (data: Transaction) => void
   defaultValues?: Partial<Transaction>
   showCancel?: boolean
+  showWalletSelection?: boolean
 }
 
 export const TransactionForm = ({
@@ -21,6 +22,7 @@ export const TransactionForm = ({
   onSubmit,
   defaultValues,
   showCancel,
+  showWalletSelection = false,
 }: TransFormProps) => {
   const {
     register,
@@ -54,6 +56,8 @@ export const TransactionForm = ({
     'other',
   ]
 
+  const { wallets, setSelectedWalletId } = useWallet()
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <Controller
@@ -77,6 +81,30 @@ export const TransactionForm = ({
           </div>
         )}
       />
+
+      <div>
+        {showWalletSelection && (
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-text-secondary">
+              Wallet
+            </label>
+            <select
+              {...register('walletId', {
+                required: true,
+                onChange: (e) => setSelectedWalletId(e.target.value),
+              })}
+              className="w-full p-2 border-2 border-border rounded bg-elevation-2
+        transition cursor-pointer text-text-primary"
+            >
+              {wallets.map((wallet) => (
+                <option key={wallet.id} value={wallet.id}>
+                  {wallet.name} – {wallet.balance} {wallet.currency}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+      </div>
 
       <div className="flex gap-4">
         <div className="w-1/2">

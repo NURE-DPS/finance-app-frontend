@@ -11,6 +11,7 @@ interface TransModalProps {
   onSave: (data: Transaction) => void
   defaultValues?: Partial<Transaction>
   showCancel?: boolean
+  showWalletSelection?: boolean
 }
 
 export const BaseTransModal = ({
@@ -20,6 +21,7 @@ export const BaseTransModal = ({
   onSave,
   defaultValues,
   showCancel = false,
+  showWalletSelection = false,
 }: TransModalProps) => {
   return (
     <Modal open={open} setOpen={setOpen}>
@@ -34,6 +36,7 @@ export const BaseTransModal = ({
         defaultValues={defaultValues}
         setOpen={setOpen}
         showCancel={showCancel}
+        showWalletSelection={showWalletSelection}
       />
     </Modal>
   )

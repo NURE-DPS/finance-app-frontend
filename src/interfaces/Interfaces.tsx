@@ -42,4 +42,5 @@ export interface Transaction {
   description: string
   category: TransactionCategory | ''
   date: Date
+  walletId?: string
 }

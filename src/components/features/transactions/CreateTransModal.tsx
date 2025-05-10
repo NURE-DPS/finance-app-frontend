@@ -2,7 +2,15 @@ import { ModalControl, Transaction } from '../../../interfaces/Interfaces'
 import { BaseTransModal } from './BaseTransModal'
 //import { createTransaction } from '../../../api/transactions/transApi'
 
-export const CreateTransModal = ({ open, setOpen }: ModalControl) => {
+type CreateTransModalProps = ModalControl & {
+  showWalletSelection?: boolean
+}
+
+export const CreateTransModal = ({
+  open,
+  setOpen,
+  showWalletSelection = false,
+}: CreateTransModalProps) => {
   const handleSave = (data: Transaction) => {
     console.log('Created transaction:', data)
     //const createdTransaction = createTransaction({ type, amount, description, category, date })
@@ -15,6 +23,7 @@ export const CreateTransModal = ({ open, setOpen }: ModalControl) => {
       open={open}
       setOpen={setOpen}
       onSave={handleSave}
+      showWalletSelection={showWalletSelection}
     />
   )
 }
