@@ -1,23 +1,16 @@
-//import { createWallet } from '../../api/wallets/walletsApi'
 import { BaseWalletModal } from './BaseWalletModal'
 import { ModalControl } from '../../../interfaces/Interfaces'
+import { useCreateWallet } from '../../../hooks/wallets/useCreateWallet'
 
 export const CreateWalletModal = ({ open, setOpen }: ModalControl) => {
-  const handleSave = (data: {
-    name: string
-    currency: string
-    balance: string
-  }) => {
-    console.log('Created wallet:', data)
-    //const createdWallet = createWallet({ name, currency, balance })
-    setOpen(false)
-  }
+  const { handleCreateWallet } = useCreateWallet(() => setOpen(false))
+
   return (
     <BaseWalletModal
       title="Add Wallet"
       open={open}
       setOpen={setOpen}
-      onSave={handleSave}
+      onSave={handleCreateWallet}
     />
   )
 }

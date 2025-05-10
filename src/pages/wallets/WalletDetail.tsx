@@ -6,7 +6,7 @@ import { EditWalletModal } from '../../components/features/wallets/EditWalletMod
 import { DeleteWalletModal } from '../../components/features/wallets/DeleteWalletModal'
 import { Button } from '../../components/UI/Button'
 import { IconButton } from '../../components/UI/IconButton'
-import { useWallet } from '../../hooks/UseWallet'
+import { useWallet } from '../../hooks/wallets/UseWallet'
 
 export const WalletDetail = () => {
   const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false)

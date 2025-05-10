@@ -7,7 +7,7 @@ import {
   LuWallet,
 } from 'react-icons/lu'
 import { NavLink } from 'react-router-dom'
-import { useLogOut } from '../../hooks/useLogOut'
+import { useLogOut } from '../../hooks/auth/useLogOut'
 
 export const Sidebar = () => {
   const linkClasses = ({ isActive }: { isActive: boolean }) =>
