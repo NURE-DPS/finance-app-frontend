@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+@import './index.css';
+
+.react-datepicker {
+  @apply bg-elevation-2  border border-border rounded-2xl;
+}
+
+.react-datepicker__header {
+  @apply bg-elevation-1  border-b border-border rounded-2xl;
+}
+
+.react-datepicker__current-month {
+  @apply text-text-secondary;
+}
+
+.react-datepicker__day,
+.react-datepicker__day-name {
+  @apply text-text-secondary;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  @apply bg-primary text-button-text rounded;
+}
+
+.react-datepicker__day:hover {
+  @apply text-button-text !bg-button-hover;
+}

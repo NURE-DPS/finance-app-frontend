@@ -1,16 +1,20 @@
-import { LuX } from 'react-icons/lu'
-import { IconButton } from '../../UI/IconButton'
-import { Modal } from '../../UI/Modal'
-import { ModalControl } from '../../../interfaces/Interfaces'
+import { ModalControl, Transaction } from '../../../interfaces/Interfaces'
+import { BaseTransModal } from './BaseTransModal'
+//import { createTransaction } from '../../../api/transactions/transApi'
 
 export const CreateTransModal = ({ open, setOpen }: ModalControl) => {
+  const handleSave = (data: Transaction) => {
+    console.log('Created transaction:', data)
+    //const createdTransaction = createTransaction({ type, amount, description, category, date })
+    setOpen(false)
+  }
+
   return (
-    <Modal open={open} setOpen={setOpen}>
-      <div className="flex justify-between items-center mb-4 text-text-primary">
-        <h2 className="text-h3 text-lato font-bold mb-4">Create Trans</h2>
-        <IconButton onClick={() => setOpen(false)} Icon={LuX} />
-      </div>
-      <p className="text-text-primary">Transaction creation</p>
-    </Modal>
+    <BaseTransModal
+      title="Add Transaction"
+      open={open}
+      setOpen={setOpen}
+      onSave={handleSave}
+    />
   )
 }

@@ -1,19 +1,10 @@
 import { useForm } from 'react-hook-form'
 import { Button } from '../../UI/Button'
-
-type FormValues = {
-  name: string
-  currency: string
-  balance: string
-}
+import { WalletFormValues } from '../../../interfaces/Interfaces'
 
 interface WalletFormProps {
-  onSubmit: (data: { name: string; currency: string; balance: string }) => void
-  defaultValues?: {
-    name: string
-    currency: string
-    balance: string
-  }
+  onSubmit: (data: WalletFormValues) => void
+  defaultValues?: WalletFormValues
   setOpen: (value: boolean) => void
   showCancel?: boolean
 }
@@ -29,7 +20,7 @@ export const WalletForm = ({
     handleSubmit,
     watch,
     formState: { errors, isValid },
-  } = useForm<FormValues>({
+  } = useForm<WalletFormValues>({
     mode: 'onChange',
     defaultValues: {
       name: defaultValues?.name || '',
