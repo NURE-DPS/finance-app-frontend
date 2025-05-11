@@ -8,6 +8,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import '../../../styles/datepicker-overrides.css'
 import { CustomDatePickerInput } from './CustomDatePickerInput'
+import { useEffect } from 'react'
 
 interface TransFormProps {
   setOpen: (value: boolean) => void
@@ -57,6 +58,17 @@ export const TransactionForm = ({
   ]
 
   const { wallets, setSelectedWalletId } = useWallet()
+
+  {
+    /* расписал суть проблемы в CreateTransModal - по идее, если мы используем это поле(поле выбора кошелька), то walletId передается автоматически, 
+а если нет, то мы передаем его через пропс в CreateTransModal */
+  }
+  useEffect(() => {
+    if (!showWalletSelection && defaultValues?.walletId) {
+      // Регистрируем поле вручную, если селект не показывается
+      register('walletId', { value: defaultValues.walletId })
+    }
+  }, [showWalletSelection, defaultValues?.walletId, register])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -189,7 +201,6 @@ export const TransactionForm = ({
         </select>
       </div>
 
-      {/* вот эта часть - это просто похороны.... */}
       <Controller
         control={control}
         name="date"

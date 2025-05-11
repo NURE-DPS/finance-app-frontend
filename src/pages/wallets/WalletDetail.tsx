@@ -7,6 +7,8 @@ import { DeleteWalletModal } from '../../components/features/wallets/DeleteWalle
 import { Button } from '../../components/UI/Button'
 import { IconButton } from '../../components/UI/IconButton'
 import { useWallet } from '../../hooks/wallets/UseWallet'
+import { transactions } from '../../stores/transactions'
+import { TransactionList } from '../../components/features/transactions/TransactionsList'
 
 export const WalletDetail = () => {
   const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false)
@@ -38,6 +40,11 @@ export const WalletDetail = () => {
         Page not found
       </div>
     )
+
+  const filteredTransactions = transactions.filter(
+    (transaction) => transaction.walletId === selectedWalletId,
+  )
+
   return (
     <div className="flex text-text-primary gap-8">
       <div className="w-3/5">
@@ -114,13 +121,12 @@ export const WalletDetail = () => {
         <CreateTransModal
           open={isCreateTransactionModelOpen}
           setOpen={setIsCreateTransactionModelOpen}
+          walletId={selectedWalletId}
         />
-        {/* Здесь будут транзакции */}
-        <div>
-          <p className="text-center text-text-secondary mt-10">
-            No transactions yet...
-          </p>
-        </div>
+        <TransactionList
+          transactions={filteredTransactions}
+          selectedWallet={selectedWallet}
+        />
       </div>
 
       {/* Правая часть */}

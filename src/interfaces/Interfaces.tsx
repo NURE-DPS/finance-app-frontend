@@ -42,5 +42,14 @@ export interface Transaction {
   description: string
   category: TransactionCategory | ''
   date: Date
-  walletId?: string
+  walletId: string
+}
+export interface TransactionNumber {
+  id: string
+  type: TransactionType
+  amount: number
+  description: string
+  category: TransactionCategory | ''
+  date: Date
+  walletId: string
 }
