@@ -1,3 +1,5 @@
+import { userCreateTransaction } from '../../../hooks/transactions/useCreateTransaction'
+import { useWallet } from '../../../hooks/wallets/UseWallet'
 import { ModalControl, Transaction } from '../../../interfaces/Interfaces'
 import { BaseTransModal } from './BaseTransModal'
 //import { createTransaction } from '../../../api/transactions/transApi'
@@ -17,18 +19,16 @@ export const CreateTransModal = ({
   showWalletSelection = false,
   walletId,
 }: CreateTransModalProps) => {
-  const handleSave = (data: Transaction) => {
-    console.log('Created transaction:', data)
-    //const createdTransaction = createTransaction({ type, amount, description, category, date, walletId })
-    setOpen(false)
-  }
+  const { handleCreateTransaction } = userCreateTransaction(
+    () => setOpen(false),
+  )
 
   return (
     <BaseTransModal
       title="Add Transaction"
       open={open}
       setOpen={setOpen}
-      onSave={handleSave}
+      onSave={handleCreateTransaction}
       showWalletSelection={showWalletSelection}
       defaultValues={{ walletId }}
     />

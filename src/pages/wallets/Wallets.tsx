@@ -3,27 +3,27 @@ import { usePageTitle } from '../../hooks/usePageTitle'
 import { useState, useEffect } from 'react'
 import { LoadingCircleSpinner } from '../../components/UI/LoadingCircleSpinner'
 import { useWallet } from '../../hooks/wallets/UseWallet'
-// import { fetchWallets } from '../../api/wallets/walletsApi'
+import { fetchWallets } from '../../api/wallets/walletsApi'
 
 export const Wallets = () => {
   const { setTitle } = usePageTitle()
-  const { wallets } = useWallet()
+  const { wallets, setWallets } = useWallet()
 
   const [loading, setLoading] = useState(true)
 
   //реализация связи с бэкэндом РАБОТАЕТ
-  // useEffect(() => {
-  //   fetchWallets()
-  //     .then((response) => {
-  //       setWallets(response.data)
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  //     .finally(() => {
-  //       setLoading(false)
-  //     })
-  // }, [])
+  useEffect(() => {
+    fetchWallets()
+      .then((response) => {
+        setWallets(response.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+      .finally(() => {
+        setLoading(false)
+      })
+  }, [])
 
   useEffect(() => {
     setTitle('My Wallets')

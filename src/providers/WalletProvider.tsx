@@ -1,11 +1,18 @@
 import { WalletContext } from '../context/WalletContext'
-import { wallets } from '../stores/wallets'
 import type { ReactNode } from 'react'
 import { useState } from 'react'
 
+export type Wallet = {
+  id: string
+  name: string
+  balance: number
+  currency: string
+}
+
 export const WalletProvider = ({ children }: { children: ReactNode }) => {
+  const [wallets, setWallets] = useState<Wallet[]>([])
   const [selectedWalletId, setSelectedWalletId] = useState<string>(
-    wallets[0].id,
+    wallets[0]?.id,
   )
 
   const selectedWallet = wallets.find(
@@ -16,6 +23,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
     <WalletContext.Provider
       value={{
         wallets,
+        setWallets,
         selectedWalletId,
         selectedWallet,
         setSelectedWalletId,

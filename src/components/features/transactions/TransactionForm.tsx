@@ -36,19 +36,17 @@ export const TransactionForm = ({
     //вроде нормально сделал тут дату, но вообще хз будет ли оно нормально работать при связи с бэкэндом
     // (тут кстати должна быть по дефолту в дате Date.now() вместо new Date(), я хз как оно без нее работает)
     defaultValues: {
-      type: defaultValues?.type || 'expense',
+      type: defaultValues?.type || 'EXPENSE',
       amount: defaultValues?.amount || '',
       description: defaultValues?.description || '',
-      category: defaultValues?.category || '',
-      date: defaultValues?.date ? new Date(defaultValues.date) : new Date(),
+      createdAt: defaultValues?.createdAt
+        ? new Date(defaultValues.createdAt)
+        : new Date(),
     },
   })
 
-  const { selectedWallet } = useWallet()
-
   const amountValue = watch('amount')
-  const categoryValue = watch('category')
-  const types: TransactionType[] = ['expense', 'income', 'transfer']
+  const types = ['EXPENSE', 'INCOME']
   const categories: TransactionCategory[] = [
     'food',
     'travel',
@@ -57,7 +55,7 @@ export const TransactionForm = ({
     'other',
   ]
 
-  const { wallets, setSelectedWalletId } = useWallet()
+  const { wallets, selectedWallet, setSelectedWalletId } = useWallet()
 
   {
     /* расписал суть проблемы в CreateTransModal - по идее, если мы используем это поле(поле выбора кошелька), то walletId передается автоматически, 
@@ -87,7 +85,7 @@ export const TransactionForm = ({
                 }`}
                 onClick={() => field.onChange(t)}
               >
-                {t.charAt(0).toUpperCase() + t.slice(1)}
+                {t.charAt(0) + t.slice(1).toLowerCase()}
               </motion.button>
             ))}
           </div>
@@ -95,27 +93,26 @@ export const TransactionForm = ({
       />
 
       <div>
-        {showWalletSelection && (
-          <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium text-text-secondary">
-              Wallet
-            </label>
-            <select
-              {...register('walletId', {
-                required: true,
-                onChange: (e) => setSelectedWalletId(e.target.value),
-              })}
-              className="w-full p-2 border-2 border-border rounded bg-elevation-2
-        transition cursor-pointer text-text-primary"
-            >
-              {wallets.map((wallet) => (
-                <option key={wallet.id} value={wallet.id}>
-                  {wallet.name} – {wallet.balance} {wallet.currency}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
+        <div className="flex flex-col gap-1">
+          <label className="text-sm font-medium text-text-secondary">
+            Wallet
+          </label>
+          <select
+            {...register('walletId', {
+              required: true,
+              onChange: (e) => setSelectedWalletId(e.target.value),
+            })}
+            disabled={!showWalletSelection}
+            className={`w-full p-2 border-2 rounded bg-elevation-2 transition text-text-primary
+      ${showWalletSelection ? 'border-border cursor-pointer' : 'border-border/50 bg-elevation-1 cursor-not-allowed text-text-secondary'}`}
+          >
+            {wallets.map((wallet) => (
+              <option key={wallet.id} value={wallet.id}>
+                {wallet.name} – {wallet.balance} {wallet.currency}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className="flex gap-4">
@@ -179,7 +176,7 @@ export const TransactionForm = ({
         </div>
       </div>
 
-      <div>
+      {/* <div>
         <label className="block text-sm font-medium text-text-secondary">
           Category {!categoryValue && <span className="text-error">*</span>}
         </label>
@@ -199,11 +196,11 @@ export const TransactionForm = ({
             </option>
           ))}
         </select>
-      </div>
+      </div> */}
 
       <Controller
         control={control}
-        name="date"
+        name="createdAt"
         rules={{ required: true }}
         render={({ field }) => (
           <div className="relative w-full">
