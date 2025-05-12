@@ -37,10 +37,11 @@ export type TransactionType = 'expense' | 'income' | 'transfer'
 
 //под вопросом нужно ли и можно ли так делать с категорией
 export interface Transaction {
-  type: TransactionType
+  walletId: string
+  categoryId?: number
+  type: 'INCOME' | 'EXPENSE'
   amount: string
-  description: string
-  category: TransactionCategory | ''
-  date: Date
-  walletId?: string
+  currency: string
+  description?: string
+  createdAt: Date
 }
