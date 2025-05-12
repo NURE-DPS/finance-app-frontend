@@ -1,10 +1,7 @@
+import { WalletTypeNumber } from '../../interfaces/Interfaces'
 import api from '../axiosInstance'
 
-export const createWallet = (walletData: {
-  name: string
-  currency: string
-  balance: number
-}) => {
+export const createWallet = (walletData: WalletTypeNumber) => {
   return api.post('/wallets', walletData)
 }
 

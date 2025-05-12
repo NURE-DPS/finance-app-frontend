@@ -11,7 +11,6 @@ export const Wallets = () => {
 
   const [loading, setLoading] = useState(true)
 
-  //реализация связи с бэкэндом РАБОТАЕТ
   useEffect(() => {
     fetchWallets()
       .then((response) => {

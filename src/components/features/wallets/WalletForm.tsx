@@ -1,10 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { Button } from '../../UI/Button'
-import { WalletFormValues } from '../../../interfaces/Interfaces'
+import {
+  WalletTypeString,
+  WalletTypeStringId,
+} from '../../../interfaces/Interfaces'
 
 interface WalletFormProps {
-  onSubmit: (data: WalletFormValues) => void
-  defaultValues?: WalletFormValues
+  onSubmit: (data: WalletTypeStringId) => void
+  defaultValues?: WalletTypeStringId
   setOpen: (value: boolean) => void
   showCancel?: boolean
 }
@@ -20,7 +23,7 @@ export const WalletForm = ({
     handleSubmit,
     watch,
     formState: { errors, isValid },
-  } = useForm<WalletFormValues>({
+  } = useForm<WalletTypeString>({
     mode: 'onChange',
     defaultValues: {
       name: defaultValues?.name || '',
@@ -34,8 +37,18 @@ export const WalletForm = ({
   const nameValue = watch('name')
   const balanceValue = watch('balance')
 
+  const handleFormSubmit = (data: WalletTypeString) => {
+    //При редактировании добавляем id
+    if (defaultValues?.id) {
+      onSubmit({ ...data, id: defaultValues.id })
+    } else {
+      // При создании нового кошелька id не нужен
+      onSubmit(data as WalletTypeStringId)
+    }
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(handleFormSubmit)}>
       <div className="mb-4">
         <label className="block text-sm font-medium text-text-secondary font-lato">
           Name {!nameValue && <span className="text-error">*</span>}

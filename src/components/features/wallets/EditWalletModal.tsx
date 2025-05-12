@@ -1,6 +1,12 @@
 //import { editWallet } from '../../api/walletsApi'
-import { ChangeWalletProps } from '../../../interfaces/Interfaces'
+import {
+  ModalControl,
+  WalletTypeNumberId,
+  WalletTypeStringId,
+} from '../../../interfaces/Interfaces'
 import { BaseWalletModal } from './BaseWalletModal'
+
+type ChangeWalletProps = ModalControl & WalletTypeNumberId
 
 export const EditWalletModal = ({
   open,
@@ -10,15 +16,8 @@ export const EditWalletModal = ({
   currency,
   balance,
 }: ChangeWalletProps) => {
-  const handleSave = (
-    id: string,
-    data: {
-      name: string
-      currency: string
-      balance: string
-    },
-  ) => {
-    console.log('Edit wallet:', id, 'New Data:', data)
+  const handleSave = (data: WalletTypeStringId) => {
+    console.log('New Data:', data)
     //const editedWallet = editWallet({id, name, currency, balance })
     setOpen(false)
   }
@@ -26,10 +25,11 @@ export const EditWalletModal = ({
   return (
     <BaseWalletModal
       title="Edit Wallet"
-      onSave={(data) => handleSave(id, data)}
+      onSave={handleSave}
       open={open}
       setOpen={setOpen}
       defaultValues={{
+        id: id,
         name: name,
         currency: currency,
         balance: balance.toString(),

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { usePageTitle } from '../../hooks/usePageTitle'
 import { useEffect } from 'react'
 import { CreateTransModal } from '../../components/features/transactions/CreateTransModal'
-import { useWallet } from '../../hooks/wallets/UseWallet'
 import { transactions } from '../../stores/transactions'
 import { TransactionCard } from '../../components/features/transactions/TransactionCard'
 
@@ -13,16 +12,10 @@ export const Dashboard = () => {
   const [isCreateTransactionModelOpen, setIsCreateTransactionModelOpen] =
     useState(false)
   const { setTitle } = usePageTitle()
-  const { wallets } = useWallet()
 
   useEffect(() => {
     setTitle('Dashboard')
   }, [setTitle])
-
-  const getCurrency = (walletId: string): string => {
-    const wallet = wallets.find((wallet) => wallet.id === walletId)
-    return wallet?.currency || 'USD' // пока что в качестве затычки валюта по умолчанию будет
-  }
 
   return (
     <>
@@ -40,7 +33,7 @@ export const Dashboard = () => {
         </div>
       </div>
       <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
-        Wallets(maybe dont need)
+        Maybe add wallets(if need)
       </div>
       <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
         <div>
@@ -60,13 +53,14 @@ export const Dashboard = () => {
               {transactions.map((trans, idx) => (
                 <TransactionCard
                   key={idx}
+                  id={trans.id}
                   walletId={trans.walletId}
-                  amount={trans.amount.toString()}
+                  amount={trans.amount}
                   type={trans.type}
                   description={trans.description}
-                  category={trans.category}
-                  date={trans.date}
-                  currency={getCurrency(trans.walletId)}
+                  //category={trans.category}
+                  createdAt={trans.createdAt}
+                  currency={trans.currency}
                 />
               ))}
             </div>

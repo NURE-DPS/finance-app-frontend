@@ -2,16 +2,13 @@ import { toast } from 'sonner'
 import { signUp } from '../../api/auth/authApi'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from './useAuth'
+import { SignUpFormValues } from '../../interfaces/Interfaces'
 
 export const useSignUp = () => {
   const navigate = useNavigate()
   const { login } = useAuth()
 
-  const handleSignUp = async (data: {
-    name: string
-    email: string
-    password: string
-  }) => {
+  const handleSignUp = async (data: SignUpFormValues) => {
     await toast.promise(
       signUp(data).then((response) => {
         const token =

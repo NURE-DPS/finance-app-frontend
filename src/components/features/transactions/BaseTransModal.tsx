@@ -2,14 +2,14 @@ import { LuX } from 'react-icons/lu'
 import { IconButton } from '../../UI/IconButton'
 import { Modal } from '../../UI/Modal'
 import { TransactionForm } from './TransactionForm'
-import { Transaction } from '../../../interfaces/Interfaces'
+import { TransactionTypeStringId } from '../../../interfaces/Interfaces'
 
 interface TransModalProps {
   title: string
   open: boolean
   setOpen: (value: boolean) => void
-  onSave: (data: Transaction) => void
-  defaultValues?: Partial<Transaction>
+  onSave: (data: TransactionTypeStringId) => void
+  defaultValues?: Partial<TransactionTypeStringId>
   showCancel?: boolean
   showWalletSelection?: boolean
 }

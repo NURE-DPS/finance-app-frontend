@@ -1,10 +1,7 @@
+import { SignUpFormValues } from '../../interfaces/Interfaces'
 import api from '../axiosInstance'
 
-export const signUp = async (signUpData: {
-  name: string
-  email: string
-  password: string
-}) => {
+export const signUp = async (signUpData: SignUpFormValues) => {
   return await api.post('/auth/signup', signUpData)
 }
 

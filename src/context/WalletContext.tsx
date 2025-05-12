@@ -1,12 +1,11 @@
 import { createContext, Dispatch, SetStateAction } from 'react'
-import { WalletType } from '../interfaces/Interfaces'
-import { Wallet } from '../providers/WalletProvider'
+import { WalletTypeNumberId } from '../interfaces/Interfaces'
 
 type WalletContextType = {
-  wallets: WalletType[]
-  setWallets: Dispatch<SetStateAction<Wallet[]>>
+  wallets: WalletTypeNumberId[]
+  setWallets: Dispatch<SetStateAction<WalletTypeNumberId[]>>
   selectedWalletId: string
-  selectedWallet: WalletType | undefined
+  selectedWallet: WalletTypeNumberId | undefined
   setSelectedWalletId: (id: string) => void
 }
 

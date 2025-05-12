@@ -1,12 +1,9 @@
 import { toast } from 'sonner'
 import { createWallet } from '../../api/wallets/walletsApi'
+import { WalletTypeString } from '../../interfaces/Interfaces'
 
 export const useCreateWallet = (onSuccess?: () => void) => {
-  const handleCreateWallet = async (data: {
-    name: string
-    currency: string
-    balance: string
-  }) => {
+  const handleCreateWallet = async (data: WalletTypeString) => {
     await toast.promise(
       createWallet({
         name: data.name,

@@ -1,15 +1,12 @@
 import { toast } from 'sonner'
 import { createTransaction } from '../../api/transactions/transactionsApi'
-import { Transaction } from '../../interfaces/Interfaces'
+import { TransactionTypeString } from '../../interfaces/Interfaces'
 
 export const userCreateTransaction = (onSuccess?: () => void) => {
-  
-  const handleCreateTransaction = async (data: Transaction) => {
-    
+  const handleCreateTransaction = async (data: TransactionTypeString) => {
     console.log({
       ...data,
-      amount: Number.parseInt(data.amount),
-      type: data.type.toUpperCase(),
+      //type: data.type.toUpperCase(),
       createdAt: data.createdAt.toISOString(),
     })
     await toast.promise(
@@ -17,7 +14,7 @@ export const userCreateTransaction = (onSuccess?: () => void) => {
         walletId: data.walletId,
         categoryId: data.categoryId,
         type: data.type,
-        amount: data.amount,
+        amount: parseFloat(data.amount),
         currency: data.currency,
         description: data.description,
         createdAt: data.createdAt,
@@ -39,5 +36,5 @@ export const userCreateTransaction = (onSuccess?: () => void) => {
     )
   }
 
-  return {handleCreateTransaction}
+  return { handleCreateTransaction }
 }

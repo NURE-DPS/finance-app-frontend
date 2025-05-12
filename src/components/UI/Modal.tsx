@@ -35,7 +35,6 @@ export const Modal = ({ children, open, setOpen }: ModalProps) => {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                //попробовать bg-elevation-1, как по мне так смотрится лучше
                 className="bg-elevation-2 w-[600px] p-6 rounded-2xl shadow-lg"
               >
                 {children}

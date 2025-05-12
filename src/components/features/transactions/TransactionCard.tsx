@@ -1,31 +1,21 @@
 import { LuArrowLeftRight, LuEllipsisVertical } from 'react-icons/lu'
-import { TransactionType } from '../../../interfaces/Interfaces'
-import { TransactionCategory } from '../../../stores/transactions'
 import { IconButton } from '../../UI/IconButton'
 import { useEffect, useRef, useState } from 'react'
 import * as motion from 'motion/react-client'
 import { EditTransModal } from './EditTransModal'
 import { DeleteTransModal } from './DeleteTransModal'
-
-interface TransactionCardProps {
-  walletId: string
-  amount: string
-  type: TransactionType
-  description: string
-  category: TransactionCategory | ''
-  date: Date
-  currency: string
-}
+import { TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 
 export const TransactionCard = ({
+  id,
   walletId,
   amount,
   type,
   description,
-  category,
-  date,
+  //categoryId,
+  createdAt,
   currency,
-}: TransactionCardProps) => {
+}: TransactionTypeNumberId) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isEditTransModalOpen, setIsEditTransModalOpen] = useState(false)
   const [isDeleteTransModalOpen, setIsDeleteTransModalOpen] = useState(false)
@@ -38,9 +28,9 @@ export const TransactionCard = ({
 
   const getAmountStyle = () => {
     switch (type) {
-      case 'expense':
+      case 'EXPENSE':
         return 'text-error'
-      case 'income':
+      case 'INCOME':
         return 'text-success'
       default:
         return 'text-text-primary'
@@ -48,9 +38,9 @@ export const TransactionCard = ({
   }
   const getSign = () => {
     switch (type) {
-      case 'expense':
+      case 'EXPENSE':
         return '-'
-      case 'income':
+      case 'INCOME':
         return '+'
       default:
         return ''
@@ -86,7 +76,7 @@ export const TransactionCard = ({
             {amount} {currency}
           </p>
           <p className="text-text-secondary text-body font-montserrat">
-            {type.charAt(0).toUpperCase() + type.slice(1)}
+            {type.charAt(0) + type.slice(1).toLowerCase()}
           </p>
         </div>
       </div>
@@ -113,16 +103,19 @@ export const TransactionCard = ({
         <EditTransModal
           open={isEditTransModalOpen}
           setOpen={setIsEditTransModalOpen}
+          id={id}
           walletId={walletId}
           type={type}
-          amount={amount}
+          amount={amount.toString()}
           description={description}
-          category={category}
-          date={date}
+          currency={currency}
+          //category={category}
+          createdAt={createdAt}
         />
         <DeleteTransModal
           open={isDeleteTransModalOpen}
           setOpen={setIsDeleteTransModalOpen}
+          id={id}
         />
       </div>
     </div>

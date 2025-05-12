@@ -65,7 +65,7 @@ export const Sidebar = () => {
         </motion.div>
         <motion.div whileTap={{ scale: 0.9 }}>
           <button
-            onClick={handleLogOut} // Викликаємо хендлер з хука
+            onClick={handleLogOut}
             className={linkClasses({ isActive: false })}
           >
             <div className="flex items-center gap-2 cursor-pointer">

@@ -123,10 +123,7 @@ export const WalletDetail = () => {
           setOpen={setIsCreateTransactionModelOpen}
           walletId={selectedWalletId}
         />
-        <TransactionList
-          transactions={filteredTransactions}
-          selectedWallet={selectedWallet}
-        />
+        <TransactionList transactions={filteredTransactions} />
       </div>
 
       {/* Правая часть */}

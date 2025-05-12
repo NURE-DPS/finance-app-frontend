@@ -1,25 +1,18 @@
-import { TransactionCategory } from '../stores/transactions'
-
 export interface ModalControl {
   open: boolean
   setOpen: (value: boolean) => void
 }
 
-export interface WalletType {
-  id: string
+type WalletBase<TBalance> = {
   name: string
-  balance: number
   currency: string
+  balance: TBalance
 }
 
-export interface ChangeWalletProps {
-  open: boolean
-  setOpen: (value: boolean) => void
-  id: string
-  name: string
-  currency: string
-  balance: number
-}
+export type WalletTypeNumber = WalletBase<number>
+export type WalletTypeString = WalletBase<string>
+export type WalletTypeNumberId = WalletTypeNumber & { id: string }
+export type WalletTypeStringId = WalletTypeString & { id: string }
 
 export type SignUpFormValues = {
   name: string
@@ -27,34 +20,17 @@ export type SignUpFormValues = {
   password: string
 }
 
-export type WalletFormValues = {
-  name: string
-  currency: string
-  balance: string
-}
-
-export type TransactionType = 'expense' | 'income' | 'transfer'
-
-//под вопросом нужно ли и можно ли так делать с категорией
-export interface Transaction {
+type TransactionBase<TTransaction> = {
   walletId: string
-  categoryId?: number
   type: 'INCOME' | 'EXPENSE'
-  amount: string
-  description: string
-  category: TransactionCategory | ''
-  date: Date
-  walletId: string
-}
-export interface TransactionNumber {
-  walletId: string
-  id: string
-  type: TransactionType
-  amount: number
-  description: string
-  category: TransactionCategory | ''
-  date: Date
+  amount: TTransaction
   currency: string
   description?: string
+  categoryId?: number
   createdAt: Date
 }
+
+export type TransactionTypeNumber = TransactionBase<number>
+export type TransactionTypeString = TransactionBase<string>
+export type TransactionTypeNumberId = TransactionTypeNumber & { id: string }
+export type TransactionTypeStringId = TransactionTypeString & { id: string }

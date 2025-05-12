@@ -1,15 +1,11 @@
-import { TransactionNumber, WalletType } from '../../../interfaces/Interfaces'
+import { TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 import { TransactionCard } from './TransactionCard'
 
 interface TransactionListProps {
-  transactions: TransactionNumber[]
-  selectedWallet: WalletType
+  transactions: TransactionTypeNumberId[]
 }
 
-export const TransactionList = ({
-  transactions,
-  selectedWallet,
-}: TransactionListProps) => {
+export const TransactionList = ({ transactions }: TransactionListProps) => {
   if (transactions.length === 0) {
     return (
       <p className="text-center text-text-secondary mt-10 text-h3 font-lato">
@@ -19,8 +15,8 @@ export const TransactionList = ({
   }
 
   const groupedByMonth = transactions.reduce(
-    (groups: { [key: string]: TransactionNumber[] }, transaction) => {
-      const date = new Date(transaction.date)
+    (groups: { [key: string]: TransactionTypeNumberId[] }, transaction) => {
+      const date = new Date(transaction.createdAt)
       const monthKey = `${date.getFullYear()}-${date.getMonth()}`
 
       if (!groups[monthKey]) {
@@ -60,18 +56,20 @@ export const TransactionList = ({
                 {groupedByMonth[monthKey]
                   .sort(
                     (a, b) =>
-                      new Date(b.date).getTime() - new Date(a.date).getTime(),
+                      new Date(b.createdAt).getTime() -
+                      new Date(a.createdAt).getTime(),
                   )
                   .map((trans, idx) => (
                     <TransactionCard
                       key={idx}
+                      id={trans.id}
                       walletId={trans.walletId}
-                      amount={trans.amount.toString()}
+                      amount={trans.amount}
                       type={trans.type}
                       description={trans.description}
-                      category={trans.category}
-                      date={trans.date}
-                      currency={selectedWallet.currency}
+                      //category={trans.category}
+                      createdAt={trans.createdAt}
+                      currency={trans.currency}
                     />
                   ))}
               </div>

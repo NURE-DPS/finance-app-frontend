@@ -1,75 +1,82 @@
-import { TransactionType } from '../interfaces/Interfaces'
+// type TransactionCategory =
+//   | 'food'
+//   | 'travel'
+//   | 'clothes'
+//   | 'entertainment'
+//   | 'other'
 
-export type TransactionCategory =
-  | 'food'
-  | 'travel'
-  | 'clothes'
-  | 'entertainment'
-  | 'other'
-
+//
 interface Transaction {
   id: string
-  type: TransactionType
-  amount: number
-  description: string
-  category: TransactionCategory
-  date: Date
   walletId: string
+  type: 'INCOME' | 'EXPENSE'
+  amount: number
+  currency: string
+  description?: string
+  categoryId?: number
+  //category: TransactionCategory
+  createdAt: Date
 }
 
 export const transactions: Transaction[] = [
   {
     id: 'txn1',
-    type: 'expense',
+    type: 'EXPENSE',
     amount: 45.99,
     description: 'Grocery shopping',
-    category: 'food',
-    date: new Date('2025-04-28'),
-    walletId: '0x4',
+    //category: 'food',
+    currency: 'UAH',
+    createdAt: new Date('2025-04-28'),
+    walletId: 'bbf1d074-5fdb-4076-97ed-19cd28344488',
   },
   {
     id: 'txn2',
-    type: 'income',
+    type: 'INCOME',
     amount: 1500,
     description: 'Freelance payment',
-    category: 'other',
-    date: new Date('2025-04-30'),
-    walletId: '0x4',
+    //category: 'other',
+    currency: 'EUR',
+    createdAt: new Date('2025-04-30'),
+    walletId: 'e3f461e9-ade7-4698-910c-9646efbaab28',
   },
   {
     id: 'txn3',
-    type: 'transfer',
+    type: 'EXPENSE',
     amount: 200,
     description: 'Transfer to savings',
-    category: 'other',
-    date: new Date('2025-05-01'),
-    walletId: '0x4',
+    //category: 'other',
+    currency: 'EUR',
+    createdAt: new Date('2025-05-01'),
+    walletId: 'e3f461e9-ade7-4698-910c-9646efbaab28',
   },
   {
     id: 'txn4',
-    type: 'expense',
+    type: 'INCOME',
     amount: 70.5,
     description: 'Cinema and snacks',
-    category: 'entertainment',
-    date: new Date('2025-05-03'),
-    walletId: '0x4',
+    //category: 'entertainment',
+    currency: 'UAH',
+    createdAt: new Date('2025-05-03'),
+    walletId: 'bbf1d074-5fdb-4076-97ed-19cd28344488',
   },
   {
     id: 'txn5',
-    type: 'expense',
+    type: 'EXPENSE',
     amount: 120,
     description: 'New shoes',
-    category: 'clothes',
-    date: new Date('2025-05-04'),
-    walletId: '0x3',
+    //category: 'clothes',
+    currency: 'USD',
+    createdAt: new Date('2025-05-04'),
+    walletId: '36d5eb6b-35c2-44b4-a353-e981b794f0ce',
   },
   {
     id: 'txn6',
-    type: 'transfer',
+    type: 'EXPENSE',
     amount: 99.25,
     description: 'Test Transfer',
-    category: 'other',
-    date: new Date('2025-02-11'),
-    walletId: '0x4',
+    //category: 'other',
+    currency: 'EUR',
+    createdAt: new Date('2025-02-11'),
+    walletId: 'e3f461e9-ade7-4698-910c-9646efbaab28',
   },
 ]

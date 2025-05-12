@@ -1,48 +1,43 @@
 import {
   ModalControl,
-  Transaction,
-  TransactionType,
+  TransactionTypeStringId,
 } from '../../../interfaces/Interfaces'
-import { TransactionCategory } from '../../../stores/transactions'
 import { BaseTransModal } from './BaseTransModal'
 
-type EditTransModalProps = ModalControl & {
-  walletId: string
-  type: TransactionType
-  amount: string
-  description: string
-  category: TransactionCategory | ''
-  date: Date
-}
+type EditTransModalProps = ModalControl & TransactionTypeStringId
 
 export const EditTransModal = ({
   open,
   setOpen,
+  id,
   walletId,
   type,
   amount,
   description,
-  category,
-  date,
+  //category,
+  createdAt,
+  currency,
 }: EditTransModalProps) => {
-  const handleSave = (data: Transaction) => {
+  const handleSave = (data: TransactionTypeStringId) => {
     console.log('Edited transaction:', data)
     //const editedTransaction = editTransaction({ type, amount, description, category, date, walletId })
     setOpen(false)
   }
   return (
     <BaseTransModal
-      title="Add Transaction"
+      title="Edit Transaction"
       open={open}
       setOpen={setOpen}
       onSave={handleSave}
       defaultValues={{
+        id: id,
         walletId: walletId,
         type: type,
         amount: amount,
         description: description,
-        category: category,
-        date: date,
+        //category: category,
+        createdAt: createdAt,
+        currency: currency,
       }}
       showCancel={true}
     />

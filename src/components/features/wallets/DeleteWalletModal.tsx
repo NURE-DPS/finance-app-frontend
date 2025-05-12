@@ -1,7 +1,12 @@
 //import { deleteWallet } from '../../api/walletsApi'
-import { ChangeWalletProps } from '../../../interfaces/Interfaces'
+import {
+  ModalControl,
+  WalletTypeNumberId,
+} from '../../../interfaces/Interfaces'
 import { Button } from '../../UI/Button'
 import { Modal } from '../../UI/Modal'
+
+type ChangeWalletProps = ModalControl & WalletTypeNumberId
 
 export const DeleteWalletModal = ({
   open,

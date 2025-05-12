@@ -1,19 +1,20 @@
 import { useForm, Controller } from 'react-hook-form'
 import { Button } from '../../UI/Button'
-import { Transaction, TransactionType } from '../../../interfaces/Interfaces'
-import { TransactionCategory } from '../../../stores/transactions'
+import {
+  TransactionTypeString,
+  TransactionTypeStringId,
+} from '../../../interfaces/Interfaces'
 import * as motion from 'motion/react-client'
 import { useWallet } from '../../../hooks/wallets/UseWallet'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import '../../../styles/datepicker-overrides.css'
 import { CustomDatePickerInput } from './CustomDatePickerInput'
-import { useEffect } from 'react'
 
 interface TransFormProps {
   setOpen: (value: boolean) => void
-  onSubmit: (data: Transaction) => void
-  defaultValues?: Partial<Transaction>
+  onSubmit: (data: TransactionTypeStringId) => void
+  defaultValues?: Partial<TransactionTypeStringId>
   showCancel?: boolean
   showWalletSelection?: boolean
 }
@@ -31,11 +32,10 @@ export const TransactionForm = ({
     watch,
     control,
     formState: { errors, isValid },
-  } = useForm<Transaction>({
+  } = useForm<TransactionTypeString>({
     mode: 'onChange',
-    //вроде нормально сделал тут дату, но вообще хз будет ли оно нормально работать при связи с бэкэндом
-    // (тут кстати должна быть по дефолту в дате Date.now() вместо new Date(), я хз как оно без нее работает)
     defaultValues: {
+      walletId: defaultValues?.walletId,
       type: defaultValues?.type || 'EXPENSE',
       amount: defaultValues?.amount || '',
       description: defaultValues?.description || '',
@@ -47,29 +47,29 @@ export const TransactionForm = ({
 
   const amountValue = watch('amount')
   const types = ['EXPENSE', 'INCOME']
-  const categories: TransactionCategory[] = [
-    'food',
-    'travel',
-    'clothes',
-    'entertainment',
-    'other',
-  ]
+  // const categories: TransactionCategory[] = [
+  //   'food',
+  //   'travel',
+  //   'clothes',
+  //   'entertainment',
+  //   'other',
+  // ]
 
-  const { wallets, selectedWallet, setSelectedWalletId } = useWallet()
+  const { wallets, selectedWallet, setSelectedWalletId, selectedWalletId } =
+    useWallet()
 
-  {
-    /* расписал суть проблемы в CreateTransModal - по идее, если мы используем это поле(поле выбора кошелька), то walletId передается автоматически, 
-а если нет, то мы передаем его через пропс в CreateTransModal */
-  }
-  useEffect(() => {
-    if (!showWalletSelection && defaultValues?.walletId) {
-      // Регистрируем поле вручную, если селект не показывается
-      register('walletId', { value: defaultValues.walletId })
+  const handleFormSubmit = (data: TransactionTypeString) => {
+    //При редактировании добавляем id
+    if (defaultValues?.id) {
+      onSubmit({ ...data, id: defaultValues.id })
+    } else {
+      // При создании новой транзакции id не нужен
+      onSubmit(data as TransactionTypeStringId)
     }
-  }, [showWalletSelection, defaultValues?.walletId, register])
+  }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
       <Controller
         name="type"
         control={control}
@@ -100,6 +100,7 @@ export const TransactionForm = ({
           <select
             {...register('walletId', {
               required: true,
+              value: selectedWalletId,
               onChange: (e) => setSelectedWalletId(e.target.value),
             })}
             disabled={!showWalletSelection}
@@ -147,7 +148,7 @@ export const TransactionForm = ({
               className="w-full p-2 border-2 border-border rounded pr-14 text-text-primary mt-1 font-lato"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary">
-              {selectedWallet?.currency}
+              {!showCancel ? selectedWallet?.currency : defaultValues?.currency}
             </span>
           </div>
           {errors.amount && (

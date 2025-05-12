@@ -1,16 +1,10 @@
 import { WalletContext } from '../context/WalletContext'
 import type { ReactNode } from 'react'
 import { useState } from 'react'
-
-export type Wallet = {
-  id: string
-  name: string
-  balance: number
-  currency: string
-}
+import { WalletTypeNumberId } from '../interfaces/Interfaces'
 
 export const WalletProvider = ({ children }: { children: ReactNode }) => {
-  const [wallets, setWallets] = useState<Wallet[]>([])
+  const [wallets, setWallets] = useState<WalletTypeNumberId[]>([])
   const [selectedWalletId, setSelectedWalletId] = useState<string>(
     wallets[0]?.id,
   )

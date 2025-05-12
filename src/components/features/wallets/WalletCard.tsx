@@ -1,8 +1,13 @@
 import * as motion from 'motion/react-client'
 import { Link } from 'react-router-dom'
-import { WalletType } from '../../../interfaces/Interfaces'
+import { WalletTypeNumberId } from '../../../interfaces/Interfaces'
 
-export const WalletCard = ({ id, name, balance, currency }: WalletType) => {
+export const WalletCard = ({
+  id,
+  name,
+  balance,
+  currency,
+}: WalletTypeNumberId) => {
   return (
     <Link to={`/wallets/${id}`}>
       <motion.div
