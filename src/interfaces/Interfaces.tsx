@@ -41,6 +41,19 @@ export interface Transaction {
   categoryId?: number
   type: 'INCOME' | 'EXPENSE'
   amount: string
+  description: string
+  category: TransactionCategory | ''
+  date: Date
+  walletId: string
+}
+export interface TransactionNumber {
+  walletId: string
+  id: string
+  type: TransactionType
+  amount: number
+  description: string
+  category: TransactionCategory | ''
+  date: Date
   currency: string
   description?: string
   createdAt: Date

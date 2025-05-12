@@ -14,9 +14,10 @@ interface Transaction {
   description: string
   category: TransactionCategory
   date: Date
+  walletId: string
 }
 
-export const mockTransactions: Transaction[] = [
+export const transactions: Transaction[] = [
   {
     id: 'txn1',
     type: 'expense',
@@ -24,6 +25,7 @@ export const mockTransactions: Transaction[] = [
     description: 'Grocery shopping',
     category: 'food',
     date: new Date('2025-04-28'),
+    walletId: '0x4',
   },
   {
     id: 'txn2',
@@ -32,6 +34,7 @@ export const mockTransactions: Transaction[] = [
     description: 'Freelance payment',
     category: 'other',
     date: new Date('2025-04-30'),
+    walletId: '0x4',
   },
   {
     id: 'txn3',
@@ -40,6 +43,7 @@ export const mockTransactions: Transaction[] = [
     description: 'Transfer to savings',
     category: 'other',
     date: new Date('2025-05-01'),
+    walletId: '0x4',
   },
   {
     id: 'txn4',
@@ -48,6 +52,7 @@ export const mockTransactions: Transaction[] = [
     description: 'Cinema and snacks',
     category: 'entertainment',
     date: new Date('2025-05-03'),
+    walletId: '0x4',
   },
   {
     id: 'txn5',
@@ -56,5 +61,15 @@ export const mockTransactions: Transaction[] = [
     description: 'New shoes',
     category: 'clothes',
     date: new Date('2025-05-04'),
+    walletId: '0x3',
+  },
+  {
+    id: 'txn6',
+    type: 'transfer',
+    amount: 99.25,
+    description: 'Test Transfer',
+    category: 'other',
+    date: new Date('2025-02-11'),
+    walletId: '0x4',
   },
 ]
