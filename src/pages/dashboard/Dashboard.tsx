@@ -5,8 +5,6 @@ import { usePageTitle } from '../../hooks/usePageTitle'
 import { useEffect } from 'react'
 import { CreateTransModal } from '../../components/features/transactions/CreateTransModal'
 import { TransactionCard } from '../../components/features/transactions/TransactionCard'
-import { fetchTransactions } from '../../api/transactions/transactionsApi'
-import { TransactionTypeNumberId } from '../../interfaces/Interfaces'
 import { LoadingCircleSpinner } from '../../components/UI/LoadingCircleSpinner'
 import { useTransactions } from '../../hooks/transactions/useTransactions'
 
