@@ -14,7 +14,7 @@ export const EditTransModal = ({
   type,
   amount,
   description,
-  //category,
+  categoryId,
   createdAt,
   currency,
 }: EditTransModalProps) => {
@@ -35,7 +35,7 @@ export const EditTransModal = ({
         type: type,
         amount: amount,
         description: description,
-        //category: category,
+        categoryId: categoryId,
         createdAt: createdAt,
         currency: currency,
       }}

@@ -6,14 +6,13 @@ import { EditTransModal } from './EditTransModal'
 import { DeleteTransModal } from './DeleteTransModal'
 import { TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 
-
 export const TransactionCard = ({
   id,
   walletId,
   amount,
   type,
   description,
-  //categoryId,
+  categoryId,
   createdAt,
   currency,
 }: TransactionTypeNumberId) => {
@@ -113,7 +112,7 @@ export const TransactionCard = ({
           amount={amount.toString()}
           description={description}
           currency={currency}
-          //category={category}
+          categoryId={categoryId}
           createdAt={createdAt}
         />
         <DeleteTransModal

@@ -26,7 +26,7 @@ type TransactionBase<TTransaction> = {
   amount: TTransaction
   currency: string
   description?: string
-  categoryId?: number
+  categoryId: string
   createdAt: Date
 }
 
@@ -36,7 +36,7 @@ export type TransactionTypeNumberId = TransactionTypeNumber & { id: string }
 export type TransactionTypeStringId = TransactionTypeString & { id: string }
 
 export type Category = {
-  id: string;
-  name: string;
-  icon: string | null;
-};
+  id: string
+  name: string
+  icon: string | null
+}

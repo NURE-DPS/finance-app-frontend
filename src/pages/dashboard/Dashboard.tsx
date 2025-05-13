@@ -52,7 +52,7 @@ export const Dashboard = () => {
           {loading ? (
             <LoadingCircleSpinner />
           ) : error ? (
-            <div className="text-red-500 mt-4">Error loading transactions.</div>
+            <div className="text-error mt-4">Error loading transactions.</div>
           ) : (
             <div className="mt-4 mr-4">
               <div className="flex flex-col">
@@ -64,6 +64,7 @@ export const Dashboard = () => {
                     amount={trans.amount}
                     type={trans.type}
                     description={trans.description}
+                    categoryId={trans.categoryId}
                     createdAt={trans.createdAt}
                     currency={trans.currency}
                   />

@@ -11,6 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import '../../../styles/datepicker-overrides.css'
 import { CustomDatePickerInput } from './CustomDatePickerInput'
 import useCategories from '../../../hooks/category/useCategories'
+import { useEffect, useState } from 'react'
 
 interface TransFormProps {
   setOpen: (value: boolean) => void
@@ -43,21 +44,19 @@ export const TransactionForm = ({
       createdAt: defaultValues?.createdAt
         ? new Date(defaultValues.createdAt)
         : new Date(),
+      categoryId: defaultValues?.categoryId || '',
     },
   })
 
-  const amountValue = watch('amount')
-  const types = ['EXPENSE', 'INCOME']
-  // const categories: TransactionCategory[] = [
-  //   'food',
-  //   'travel',
-  //   'clothes',
-  //   'entertainment',
-  //   'other',
-  // ]
+  // const [selectedCategoryId, setSelectedCategoryId] = useState(
+  //   defaultValues?.categoryId,
+  // )
 
-  
-  // const { categories } = useCategories()
+  const amountValue = watch('amount')
+  const categoryIdValue = watch('categoryId')
+  const types = ['EXPENSE', 'INCOME']
+
+  const { categories } = useCategories()
 
   const { wallets, selectedWallet, setSelectedWalletId, selectedWalletId } =
     useWallet()
@@ -71,6 +70,12 @@ export const TransactionForm = ({
       onSubmit(data as TransactionTypeStringId)
     }
   }
+
+  // useEffect(() => {
+  //   if (defaultValues?.categoryId) {
+  //     setValue('categoryId', defaultValues.categoryId)
+  //   }
+  // }, [defaultValues?.categoryId, setValue])
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
@@ -181,27 +186,32 @@ export const TransactionForm = ({
         </div>
       </div>
 
-      {/* <div>
+      <div>
         <label className="block text-sm font-medium text-text-secondary">
-          Category {!categoryValue && <span className="text-error">*</span>}
+          Category {!categoryIdValue && <span className="text-error">*</span>}
         </label>
         <select
-          {...register('category', {
+          {...register('categoryId', {
             required: true,
+            value: defaultValues?.categoryId,
+            //value: selectedCategoryId,
+            //onChange: (e) => setSelectedCategoryId(e.target.value),
           })}
           className={`w-full p-2 border-2 border-border rounded bg-elevation-2 
-            mt-1 transition cursor-pointer ${categoryValue ? 'text-text-primary' : 'text-text-secondary'}`}
+            mt-1 transition cursor-pointer ${categoryIdValue ? 'text-text-primary' : 'text-text-secondary'}`}
         >
-          <option value="" disabled>
+          <option value="" disabled hidden>
             Select category
           </option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.icon} {category.name}
             </option>
           ))}
         </select>
-      </div> */}
+        <p>{defaultValues?.categoryId}</p>
+        <p>watch categoryId: {categoryIdValue}</p>
+      </div>
 
       <Controller
         control={control}
