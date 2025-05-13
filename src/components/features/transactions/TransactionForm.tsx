@@ -10,6 +10,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import '../../../styles/datepicker-overrides.css'
 import { CustomDatePickerInput } from './CustomDatePickerInput'
+import useCategories from '../../../hooks/category/useCategories'
 
 interface TransFormProps {
   setOpen: (value: boolean) => void
@@ -54,6 +55,9 @@ export const TransactionForm = ({
   //   'entertainment',
   //   'other',
   // ]
+
+  
+  // const { categories } = useCategories()
 
   const { wallets, selectedWallet, setSelectedWalletId, selectedWalletId } =
     useWallet()

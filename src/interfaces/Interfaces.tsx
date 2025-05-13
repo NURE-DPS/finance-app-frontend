@@ -34,3 +34,9 @@ export type TransactionTypeNumber = TransactionBase<number>
 export type TransactionTypeString = TransactionBase<string>
 export type TransactionTypeNumberId = TransactionTypeNumber & { id: string }
 export type TransactionTypeStringId = TransactionTypeString & { id: string }
+
+export type Category = {
+  id: string;
+  name: string;
+  icon: string | null;
+};
