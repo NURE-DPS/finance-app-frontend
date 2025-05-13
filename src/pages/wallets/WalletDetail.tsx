@@ -10,6 +10,7 @@ import { useWallet } from '../../hooks/wallets/UseWallet'
 import { TransactionList } from '../../components/features/transactions/TransactionsList'
 import { useTransactions } from '../../hooks/transactions/useTransactions'
 import { LoadingCircleSpinner } from '../../components/UI/LoadingCircleSpinner'
+import { usePageTitle } from '../../hooks/usePageTitle'
 
 export const WalletDetail = () => {
   const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false)
@@ -17,7 +18,7 @@ export const WalletDetail = () => {
 
   const { wallets, selectedWalletId, selectedWallet, setSelectedWalletId } =
     useWallet()
-
+  const { setTitle } = usePageTitle()
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
 
@@ -29,6 +30,10 @@ export const WalletDetail = () => {
   useEffect(() => {
     if (id) setSelectedWalletId(id)
   }, [id])
+
+  useEffect(() => {
+    setTitle('My Wallets')
+  }, [setTitle])
 
   const handleWalletChange = async (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -131,7 +136,7 @@ export const WalletDetail = () => {
             <LoadingCircleSpinner />
           </div>
         ) : error ? (
-          <div className="text-red-500 mt-4 text-center">{error}</div>
+          <div className="text-error mt-4 text-center">{error}</div>
         ) : (
           <TransactionList transactions={filteredTransactions} />
         )}

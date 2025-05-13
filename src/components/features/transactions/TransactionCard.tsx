@@ -67,10 +67,7 @@ export const TransactionCard = ({
   }, [menuOpen])
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="w-full bg-surface rounded-2xl shadow-md p-4 flex items-center justify-between mb-4"
-    >
+    <div className="w-full bg-surface rounded-2xl shadow-md p-4 flex items-center justify-between mb-4">
       <div className="flex items-center">
         <LuArrowLeftRight className="text-text-secondary w-6 h-6 mr-4" />
         <div>
@@ -125,6 +122,6 @@ export const TransactionCard = ({
           id={id}
         />
       </div>
-    </motion.div>
+    </div>
   )
 }

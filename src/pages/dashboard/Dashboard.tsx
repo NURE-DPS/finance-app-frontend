@@ -23,16 +23,15 @@ export const Dashboard = () => {
   return (
     <>
       <div className="w-full flex justify-between items-center">
+        <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
+          Maybe add wallets (if needed)
+        </div>
         <Button
           onClick={() => setIsWalletModalOpen(true)}
           text="Add Wallet"
           fullwidth={false}
           defpadding={false}
         />
-      </div>
-
-      <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
-        Maybe add wallets (if needed)
       </div>
 
       <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">

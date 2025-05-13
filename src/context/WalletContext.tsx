@@ -7,6 +7,8 @@ type WalletContextType = {
   selectedWalletId: string
   selectedWallet: WalletTypeNumberId | undefined
   setSelectedWalletId: (id: string) => void
+  loading: boolean
+  error: null | string
 }
 
 export const WalletContext = createContext<WalletContextType | undefined>(
