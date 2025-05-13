@@ -7,8 +7,9 @@ import { DeleteWalletModal } from '../../components/features/wallets/DeleteWalle
 import { Button } from '../../components/UI/Button'
 import { IconButton } from '../../components/UI/IconButton'
 import { useWallet } from '../../hooks/wallets/UseWallet'
-import { transactions } from '../../stores/transactions'
 import { TransactionList } from '../../components/features/transactions/TransactionsList'
+import { useTransactions } from '../../hooks/transactions/useTransactions'
+import { LoadingCircleSpinner } from '../../components/UI/LoadingCircleSpinner'
 
 export const WalletDetail = () => {
   const [isEditWalletModalOpen, setIsEditWalletModalOpen] = useState(false)
@@ -22,6 +23,8 @@ export const WalletDetail = () => {
 
   const [isCreateTransactionModelOpen, setIsCreateTransactionModelOpen] =
     useState(false)
+
+  const { transactions, loading, error } = useTransactions(selectedWalletId)
 
   useEffect(() => {
     if (id) setSelectedWalletId(id)
@@ -123,7 +126,15 @@ export const WalletDetail = () => {
           setOpen={setIsCreateTransactionModelOpen}
           walletId={selectedWalletId}
         />
-        <TransactionList transactions={filteredTransactions} />
+        {loading ? (
+          <div className="mt-4 flex justify-center">
+            <LoadingCircleSpinner />
+          </div>
+        ) : error ? (
+          <div className="text-red-500 mt-4 text-center">{error}</div>
+        ) : (
+          <TransactionList transactions={filteredTransactions} />
+        )}
       </div>
 
       {/* Правая часть */}

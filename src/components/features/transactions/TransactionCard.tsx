@@ -6,6 +6,7 @@ import { EditTransModal } from './EditTransModal'
 import { DeleteTransModal } from './DeleteTransModal'
 import { TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 
+
 export const TransactionCard = ({
   id,
   walletId,
@@ -67,7 +68,10 @@ export const TransactionCard = ({
   }, [menuOpen])
 
   return (
-    <div className="w-full bg-surface rounded-2xl shadow-md p-4 flex items-center justify-between mb-4">
+    <motion.div
+      whileHover={{ scale: 1.02 }}
+      className="w-full bg-surface rounded-2xl shadow-md p-4 flex items-center justify-between mb-4"
+    >
       <div className="flex items-center">
         <LuArrowLeftRight className="text-text-secondary w-6 h-6 mr-4" />
         <div>
@@ -118,6 +122,6 @@ export const TransactionCard = ({
           id={id}
         />
       </div>
-    </div>
+    </motion.div>
   )
 }
