@@ -89,14 +89,18 @@ export const TransactionCard = ({
           <div className="absolute right-0 mt-2 w-24 bg-elevation-1 shadow-lg rounded-xl border-border border-2 z-10 p-2">
             <motion.button
               className="w-full text-left p-2 text-text-secondary rounded-[12px] transition font-lato bg-elevation-1 hover:bg-elevation-2 hover:text-text-primary cursor-pointer"
-              onClick={() => setIsEditTransModalOpen(true)}
+              onClick={() => {
+                setIsEditTransModalOpen(true), setMenuOpen(false)
+              }}
               whileTap={{ scale: 0.8 }}
             >
               Edit
             </motion.button>
             <motion.button
               className="w-full text-left p-2 text-text-secondary rounded-[12px] transition font-lato bg-elevation-1 hover:bg-elevation-2 hover:text-text-primary cursor-pointer"
-              onClick={() => setIsDeleteTransModalOpen(true)}
+              onClick={() => {
+                setIsDeleteTransModalOpen(true), setMenuOpen(false)
+              }}
               whileTap={{ scale: 0.8 }}
             >
               Delete

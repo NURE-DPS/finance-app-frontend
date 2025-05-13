@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import '../../../styles/datepicker-overrides.css'
 import { CustomDatePickerInput } from './CustomDatePickerInput'
 import useCategories from '../../../hooks/category/useCategories'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 interface TransFormProps {
   setOpen: (value: boolean) => void
@@ -33,6 +33,7 @@ export const TransactionForm = ({
     handleSubmit,
     watch,
     control,
+    reset,
     formState: { errors, isValid },
   } = useForm<TransactionTypeString>({
     mode: 'onChange',
@@ -48,10 +49,6 @@ export const TransactionForm = ({
     },
   })
 
-  // const [selectedCategoryId, setSelectedCategoryId] = useState(
-  //   defaultValues?.categoryId,
-  // )
-
   const amountValue = watch('amount')
   const categoryIdValue = watch('categoryId')
   const types = ['EXPENSE', 'INCOME']
@@ -62,20 +59,23 @@ export const TransactionForm = ({
     useWallet()
 
   const handleFormSubmit = (data: TransactionTypeString) => {
-    //При редактировании добавляем id
     if (defaultValues?.id) {
       onSubmit({ ...data, id: defaultValues.id })
     } else {
-      // При создании новой транзакции id не нужен
       onSubmit(data as TransactionTypeStringId)
     }
   }
 
-  // useEffect(() => {
-  //   if (defaultValues?.categoryId) {
-  //     setValue('categoryId', defaultValues.categoryId)
-  //   }
-  // }, [defaultValues?.categoryId, setValue])
+  useEffect(() => {
+    if (defaultValues && categories.length > 0) {
+      reset({
+        ...defaultValues,
+        createdAt: defaultValues.createdAt
+          ? new Date(defaultValues.createdAt)
+          : new Date(),
+      })
+    }
+  }, [defaultValues, categories, reset])
 
   return (
     <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-4">
@@ -186,6 +186,7 @@ export const TransactionForm = ({
         </div>
       </div>
 
+      {/* проблема из-за асинхронной загрузки категорий */}
       <div>
         <label className="block text-sm font-medium text-text-secondary">
           Category {!categoryIdValue && <span className="text-error">*</span>}
@@ -193,9 +194,6 @@ export const TransactionForm = ({
         <select
           {...register('categoryId', {
             required: true,
-            value: defaultValues?.categoryId,
-            //value: selectedCategoryId,
-            //onChange: (e) => setSelectedCategoryId(e.target.value),
           })}
           className={`w-full p-2 border-2 border-border rounded bg-elevation-2 
             mt-1 transition cursor-pointer ${categoryIdValue ? 'text-text-primary' : 'text-text-secondary'}`}
@@ -209,8 +207,6 @@ export const TransactionForm = ({
             </option>
           ))}
         </select>
-        <p>{defaultValues?.categoryId}</p>
-        <p>watch categoryId: {categoryIdValue}</p>
       </div>
 
       <Controller
