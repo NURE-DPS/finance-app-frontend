@@ -10,6 +10,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import '../../../styles/datepicker-overrides.css'
 import { CustomDatePickerInput } from './CustomDatePickerInput'
+import useCategories from '../../../hooks/category/useCategories'
 
 interface TransFormProps {
   setOpen: (value: boolean) => void
@@ -42,28 +43,23 @@ export const TransactionForm = ({
       createdAt: defaultValues?.createdAt
         ? new Date(defaultValues.createdAt)
         : new Date(),
+      categoryId: defaultValues?.categoryId || '',
     },
   })
 
   const amountValue = watch('amount')
+  const categoryIdValue = watch('categoryId')
   const types = ['EXPENSE', 'INCOME']
-  // const categories: TransactionCategory[] = [
-  //   'food',
-  //   'travel',
-  //   'clothes',
-  //   'entertainment',
-  //   'other',
-  // ]
+
+  const { categories, loading, error } = useCategories()
 
   const { wallets, selectedWallet, setSelectedWalletId, selectedWalletId } =
     useWallet()
 
   const handleFormSubmit = (data: TransactionTypeString) => {
-    //При редактировании добавляем id
     if (defaultValues?.id) {
       onSubmit({ ...data, id: defaultValues.id })
     } else {
-      // При создании новой транзакции id не нужен
       onSubmit(data as TransactionTypeStringId)
     }
   }
@@ -148,7 +144,13 @@ export const TransactionForm = ({
               className="w-full p-2 border-2 border-border rounded pr-14 text-text-primary mt-1 font-lato"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-text-secondary">
-              {!showCancel ? selectedWallet?.currency : defaultValues?.currency}
+              {!showCancel
+                ? selectedWallet
+                  ? selectedWallet?.currency
+                  : wallets[0]
+                    ? wallets[0].currency
+                    : ''
+                : defaultValues?.currency}
             </span>
           </div>
           {errors.amount && (
@@ -177,27 +179,46 @@ export const TransactionForm = ({
         </div>
       </div>
 
-      {/* <div>
-        <label className="block text-sm font-medium text-text-secondary">
-          Category {!categoryValue && <span className="text-error">*</span>}
-        </label>
-        <select
-          {...register('category', {
-            required: true,
-          })}
-          className={`w-full p-2 border-2 border-border rounded bg-elevation-2 
-            mt-1 transition cursor-pointer ${categoryValue ? 'text-text-primary' : 'text-text-secondary'}`}
-        >
-          <option value="" disabled>
-            Select category
-          </option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat.charAt(0).toUpperCase() + cat.slice(1)}
+      {loading ? (
+        <div>
+          <label className="block text-sm font-medium text-text-secondary">
+            Category {!categoryIdValue && <span className="text-error">*</span>}
+          </label>
+          <select
+            className={`w-full p-2 border-2 border-border rounded bg-elevation-2 
+            mt-1 transition cursor-pointer text-text-secondary`}
+          >
+            <option value="" disabled hidden>
+              Select category
             </option>
-          ))}
-        </select>
-      </div> */}
+          </select>
+        </div>
+      ) : error ? (
+        <div className="text-error mt-4">Error loading transactions.</div>
+      ) : (
+        <div>
+          <label className="block text-sm font-medium text-text-secondary">
+            Category {!categoryIdValue && <span className="text-error">*</span>}
+          </label>
+          <select
+            {...register('categoryId', {
+              required: true,
+            })}
+            className={`w-full p-2 border-2 border-border rounded bg-elevation-2 
+            mt-1 transition cursor-pointer ${categoryIdValue ? 'text-text-primary' : 'text-text-secondary'}`}
+          >
+            <option value="" disabled hidden>
+              Select category
+            </option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.icon} {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
+      {/* проблема из-за асинхронной загрузки категорий */}
 
       <Controller
         control={control}

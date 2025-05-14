@@ -67,7 +67,7 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
                       amount={trans.amount}
                       type={trans.type}
                       description={trans.description}
-                      //category={trans.category}
+                      categoryId={trans.categoryId}
                       createdAt={trans.createdAt}
                       currency={trans.currency}
                     />

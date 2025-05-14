@@ -23,16 +23,15 @@ export const Dashboard = () => {
   return (
     <>
       <div className="w-full flex justify-between items-center">
+        <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
+          Maybe add wallets (if needed)
+        </div>
         <Button
           onClick={() => setIsWalletModalOpen(true)}
           text="Add Wallet"
           fullwidth={false}
           defpadding={false}
         />
-      </div>
-
-      <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
-        Maybe add wallets (if needed)
       </div>
 
       <div className="grid grid-cols-3 justify-center gap-8 px-5 mt-4">
@@ -52,7 +51,7 @@ export const Dashboard = () => {
           {loading ? (
             <LoadingCircleSpinner />
           ) : error ? (
-            <div className="text-red-500 mt-4">Error loading transactions.</div>
+            <div className="text-error mt-4">Error loading transactions.</div>
           ) : (
             <div className="mt-4 mr-4">
               <div className="flex flex-col">
@@ -64,6 +63,7 @@ export const Dashboard = () => {
                     amount={trans.amount}
                     type={trans.type}
                     description={trans.description}
+                    categoryId={trans.categoryId}
                     createdAt={trans.createdAt}
                     currency={trans.currency}
                   />

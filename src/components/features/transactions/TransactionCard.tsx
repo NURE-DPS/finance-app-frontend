@@ -6,14 +6,13 @@ import { EditTransModal } from './EditTransModal'
 import { DeleteTransModal } from './DeleteTransModal'
 import { TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 
-
 export const TransactionCard = ({
   id,
   walletId,
   amount,
   type,
   description,
-  //categoryId,
+  categoryId,
   createdAt,
   currency,
 }: TransactionTypeNumberId) => {
@@ -68,10 +67,7 @@ export const TransactionCard = ({
   }, [menuOpen])
 
   return (
-    <motion.div
-      whileHover={{ scale: 1.02 }}
-      className="w-full bg-surface rounded-2xl shadow-md p-4 flex items-center justify-between mb-4"
-    >
+    <div className="w-full bg-surface rounded-2xl shadow-md p-4 flex items-center justify-between mb-4">
       <div className="flex items-center">
         <LuArrowLeftRight className="text-text-secondary w-6 h-6 mr-4" />
         <div>
@@ -90,14 +86,18 @@ export const TransactionCard = ({
           <div className="absolute right-0 mt-2 w-24 bg-elevation-1 shadow-lg rounded-xl border-border border-2 z-10 p-2">
             <motion.button
               className="w-full text-left p-2 text-text-secondary rounded-[12px] transition font-lato bg-elevation-1 hover:bg-elevation-2 hover:text-text-primary cursor-pointer"
-              onClick={() => setIsEditTransModalOpen(true)}
+              onClick={() => {
+                setIsEditTransModalOpen(true), setMenuOpen(false)
+              }}
               whileTap={{ scale: 0.8 }}
             >
               Edit
             </motion.button>
             <motion.button
               className="w-full text-left p-2 text-text-secondary rounded-[12px] transition font-lato bg-elevation-1 hover:bg-elevation-2 hover:text-text-primary cursor-pointer"
-              onClick={() => setIsDeleteTransModalOpen(true)}
+              onClick={() => {
+                setIsDeleteTransModalOpen(true), setMenuOpen(false)
+              }}
               whileTap={{ scale: 0.8 }}
             >
               Delete
@@ -113,7 +113,7 @@ export const TransactionCard = ({
           amount={amount.toString()}
           description={description}
           currency={currency}
-          //category={category}
+          categoryId={categoryId}
           createdAt={createdAt}
         />
         <DeleteTransModal
@@ -122,6 +122,6 @@ export const TransactionCard = ({
           id={id}
         />
       </div>
-    </motion.div>
+    </div>
   )
 }
