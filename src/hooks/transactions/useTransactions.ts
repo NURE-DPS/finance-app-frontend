@@ -27,5 +27,5 @@ export const useTransactions = (walletId?: string) => {
     loadTransactions()
   }, [walletId])
 
-  return { transactions, loading, error }
+  return { transactions, loading, error, setTransactions }
 }

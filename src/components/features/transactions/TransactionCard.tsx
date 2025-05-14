@@ -6,6 +6,12 @@ import { EditTransModal } from './EditTransModal'
 import { DeleteTransModal } from './DeleteTransModal'
 import { TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 
+type TransactionCardProps = TransactionTypeNumberId & {
+  setTransactions: React.Dispatch<
+    React.SetStateAction<TransactionTypeNumberId[]>
+  >
+}
+
 export const TransactionCard = ({
   id,
   walletId,
@@ -15,7 +21,8 @@ export const TransactionCard = ({
   categoryId,
   createdAt,
   currency,
-}: TransactionTypeNumberId) => {
+  setTransactions,
+}: TransactionCardProps) => {
   const [menuOpen, setMenuOpen] = useState(false)
   const [isEditTransModalOpen, setIsEditTransModalOpen] = useState(false)
   const [isDeleteTransModalOpen, setIsDeleteTransModalOpen] = useState(false)
@@ -120,6 +127,9 @@ export const TransactionCard = ({
           open={isDeleteTransModalOpen}
           setOpen={setIsDeleteTransModalOpen}
           id={id}
+          onDeleted={() => {
+            setTransactions((prev) => prev.filter((t) => t.id !== id))
+          }}
         />
       </div>
     </div>
