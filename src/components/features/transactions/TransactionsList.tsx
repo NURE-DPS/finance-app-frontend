@@ -3,9 +3,12 @@ import { TransactionCard } from './TransactionCard'
 
 interface TransactionListProps {
   transactions: TransactionTypeNumberId[]
+  setTransactions: React.Dispatch<
+    React.SetStateAction<TransactionTypeNumberId[]>
+  >
 }
 
-export const TransactionList = ({ transactions }: TransactionListProps) => {
+export const TransactionList = ({ transactions, setTransactions }: TransactionListProps) => {
   if (transactions.length === 0) {
     return (
       <p className="text-center text-text-secondary mt-10 text-h3 font-lato">
@@ -70,6 +73,7 @@ export const TransactionList = ({ transactions }: TransactionListProps) => {
                       categoryId={trans.categoryId}
                       createdAt={trans.createdAt}
                       currency={trans.currency}
+                      setTransactions={setTransactions}
                     />
                   ))}
               </div>

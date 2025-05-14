@@ -1,10 +1,12 @@
+import { useEditTransaction } from '../../../hooks/transactions/useEditTransaction'
 import {
   ModalControl,
   TransactionTypeStringId,
 } from '../../../interfaces/Interfaces'
 import { BaseTransModal } from './BaseTransModal'
 
-type EditTransModalProps = ModalControl & TransactionTypeStringId
+type EditTransModalProps = ModalControl &
+  TransactionTypeStringId
 
 export const EditTransModal = ({
   open,
@@ -18,9 +20,9 @@ export const EditTransModal = ({
   createdAt,
   currency,
 }: EditTransModalProps) => {
+  const {handleEditTransaction} = useEditTransaction()
   const handleSave = (data: TransactionTypeStringId) => {
-    console.log('Edited transaction:', data)
-    //const editedTransaction = editTransaction({ type, amount, description, category, date, walletId })
+    handleEditTransaction(id, data)
     setOpen(false)
   }
   return (

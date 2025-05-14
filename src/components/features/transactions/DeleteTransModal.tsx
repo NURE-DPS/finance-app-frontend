@@ -1,19 +1,26 @@
 //import { deleteTransaction } from '../../api/transactionApi'
+import { useDeleteTransaction } from '../../../hooks/transactions/useDeleteTransaction'
 import { ModalControl } from '../../../interfaces/Interfaces'
 import { Button } from '../../UI/Button'
 import { Modal } from '../../UI/Modal'
 
-type DeleteTransModalProps = ModalControl & { id: string }
+type DeleteTransModalProps = ModalControl & {
+  id: string
+  onDeleted?: () => void
+}
 
 export const DeleteTransModal = ({
   open,
   setOpen,
   id,
+  onDeleted,
 }: DeleteTransModalProps) => {
+  const { handleDeleteTransaction } = useDeleteTransaction()
   const handleDelete = (id: string) => {
-    console.log('Delete transaction: ', { id })
-    //const deletedTransaction = deleteTransaction({ id })
-    setOpen(false)
+    handleDeleteTransaction(id, () => {
+      onDeleted?.()
+      setOpen(false)
+    })
   }
 
   return (

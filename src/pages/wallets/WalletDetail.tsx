@@ -25,7 +25,8 @@ export const WalletDetail = () => {
   const [isCreateTransactionModelOpen, setIsCreateTransactionModelOpen] =
     useState(false)
 
-  const { transactions, loading, error } = useTransactions(selectedWalletId)
+  const { transactions, loading, error, setTransactions } =
+    useTransactions(selectedWalletId)
 
   useEffect(() => {
     if (id) setSelectedWalletId(id)
@@ -138,7 +139,10 @@ export const WalletDetail = () => {
         ) : error ? (
           <div className="text-error mt-4 text-center">{error}</div>
         ) : (
-          <TransactionList transactions={filteredTransactions} />
+          <TransactionList
+            transactions={filteredTransactions}
+            setTransactions={setTransactions}
+          />
         )}
       </div>
 

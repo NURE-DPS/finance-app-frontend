@@ -14,7 +14,7 @@ export const Dashboard = () => {
     useState(false)
   const { setTitle } = usePageTitle()
 
-  const { transactions, loading, error } = useTransactions()
+  const { transactions, loading, error, setTransactions } = useTransactions()
 
   useEffect(() => {
     setTitle('Dashboard')
@@ -66,6 +66,7 @@ export const Dashboard = () => {
                     categoryId={trans.categoryId}
                     createdAt={trans.createdAt}
                     currency={trans.currency}
+                    setTransactions={setTransactions}
                   />
                 ))}
               </div>
