@@ -122,6 +122,7 @@ export const TransactionCard = ({
           currency={currency}
           categoryId={categoryId}
           createdAt={createdAt}
+          setTransactions={setTransactions}
         />
         <DeleteTransModal
           open={isDeleteTransModalOpen}

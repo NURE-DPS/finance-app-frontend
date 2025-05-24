@@ -131,6 +131,7 @@ export const WalletDetail = () => {
           open={isCreateTransactionModelOpen}
           setOpen={setIsCreateTransactionModelOpen}
           walletId={selectedWalletId}
+          setTransactions={setTransactions}
         />
         {loading ? (
           <div className="mt-4 flex justify-center">

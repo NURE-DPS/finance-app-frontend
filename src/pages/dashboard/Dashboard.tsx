@@ -93,6 +93,7 @@ export const Dashboard = () => {
         open={isCreateTransactionModelOpen}
         setOpen={setIsCreateTransactionModelOpen}
         showWalletSelection={true}
+        setTransactions={setTransactions}
       />
     </>
   )

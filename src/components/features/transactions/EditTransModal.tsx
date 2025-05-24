@@ -1,12 +1,16 @@
 import { useEditTransaction } from '../../../hooks/transactions/useEditTransaction'
 import {
   ModalControl,
+  TransactionTypeNumberId,
   TransactionTypeStringId,
 } from '../../../interfaces/Interfaces'
 import { BaseTransModal } from './BaseTransModal'
 
 type EditTransModalProps = ModalControl &
-  TransactionTypeStringId
+  TransactionTypeStringId & 
+    {setTransactions: React.Dispatch<
+      React.SetStateAction<TransactionTypeNumberId[]>
+    >}
 
 export const EditTransModal = ({
   open,
@@ -19,8 +23,13 @@ export const EditTransModal = ({
   categoryId,
   createdAt,
   currency,
+  setTransactions,
 }: EditTransModalProps) => {
-  const {handleEditTransaction} = useEditTransaction()
+  const { handleEditTransaction } = useEditTransaction(
+    undefined,
+    setTransactions,
+  )
+
   const handleSave = (data: TransactionTypeStringId) => {
     handleEditTransaction(id, data)
     setOpen(false)

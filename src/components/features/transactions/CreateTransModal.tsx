@@ -1,10 +1,13 @@
 import { userCreateTransaction } from '../../../hooks/transactions/useCreateTransaction'
-import { ModalControl } from '../../../interfaces/Interfaces'
+import { ModalControl, TransactionTypeNumberId } from '../../../interfaces/Interfaces'
 import { BaseTransModal } from './BaseTransModal'
 
 type CreateTransModalProps = ModalControl & {
   showWalletSelection?: boolean
   walletId?: string
+  setTransactions: React.Dispatch<
+    React.SetStateAction<TransactionTypeNumberId[]>
+  >
 }
 
 export const CreateTransModal = ({
@@ -12,9 +15,11 @@ export const CreateTransModal = ({
   setOpen,
   showWalletSelection = false,
   walletId,
+  setTransactions,
 }: CreateTransModalProps) => {
-  const { handleCreateTransaction } = userCreateTransaction(() =>
-    setOpen(false),
+  const { handleCreateTransaction } = userCreateTransaction(
+    () => setOpen(false),
+    setTransactions
   )
 
   return (
